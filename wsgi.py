@@ -9,7 +9,7 @@ import requests
 app = create_app()
 
 if __name__ == "__main__":
-    app.run(port=8001, debug=True)
+    app.run(debug=True)
 
 
 # register the error handler
