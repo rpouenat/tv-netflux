@@ -1,0 +1,28 @@
+<html>
+
+
+<!-- CSS  -->
+ <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
+
+
+<!-- HTML -->
+<video id='hls-example'  class="video-js vjs-default-skin" width="400" height="300" controls>
+<source type="application/x-mpegURL" src="https://netflux.fun:2087/tv/tf1/ZXhwPTE3MDk4NTM3OTZ+YWNsPSUyZip+aG1hYz0yMTExYzA4ODUwODU2YmFlOGQ3MzFiZjU1ZDZjYTUyZDUzYmZmN2IwOGIyNDMyMDJhNTE1MGNhODkxMDA5YTQ1/dai/v1/master/14bff07f70f2518f32f1c6cc13a91ef489dc83f1/SSARFrance2OTTEMTConfiguration/out/v1/535afd7806de45fea4e030b74cea3b8f/index.m3u8?aws.sessionId=fab4b866-7a32-4876-b84d-8ac887f48b02&hdnea=exp=1709832796~acl=%2f*~hmac=c683ce7629f3d493090c8b25997652e89b022f7f546e0c424f1ed8e615f006eb">
+</video>
+
+
+<!-- JS code -->
+<!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+<script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
+<script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+
+<script>
+var player = videojs('hls-example');
+player.play();
+</script>
+
+
+
+
+</html>

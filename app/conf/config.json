@@ -1,0 +1,9 @@
+{
+    "SECRET_KEY": "maze*-azeae=+&*",
+    "SQLALCHEMY_DATABASE_URI": "sqlite:///Databases.db",
+    "facebook": {
+        "access_token": "EAAEdMYjYZCBsBAHd8FV7EnbZCpWwBSGJ9dxTHbhCa7EuVtvIueKXZBYR5kWjAoXOZBBlju7ayyputBbufJ0ZA5fewHdHosuneUpmB8e020eB7rpi91KRdB1mOMZAq0NJIw032xORxAKuLswe3pvzZCheniMlU3ZCDZAcv31map6Qpvocls92Jp2tF",
+        "url_facebook": "https://graph.facebook.com/v8.0/me/messages?"
+    },
+    "env": "production"
+}
