@@ -97,7 +97,9 @@ def getUrlFranceTV(chaine_name):
 					facebookNotification(message)
 
 				end = time.time()
-				print("[+] Temps : " + str(end - start))
+				time_exec = end - start
+				data_output["time_exec"] = time_exec
+				print("[+] Temps : " + str(time_exec))
 
 	else:
 		error = "Unknown TV"

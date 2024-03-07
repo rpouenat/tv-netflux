@@ -26,7 +26,7 @@ echo "[Service]" >> /etc/systemd/system/tv-netflux.service
 echo "User=download" >> /etc/systemd/system/tv-netflux.service
 echo "Group=www-data" >> /etc/systemd/system/tv-netflux.service
 echo "WorkingDirectory=/home/download/Scripts/tv-netflux" >> /etc/systemd/system/tv-netflux.service
-echo "ExecStart=/home/download/Scripts/tv-netflux/venv/bin/gunicorn --preload --workers 12 --bind 0.0.0.0:5000 -m 007 wsgi:app --access-logfile /var/log/tv-netflux/access.log --error-logfile /var/log/tv-netflux/error.log --timeout 18000" >> /etc/systemd/system/tv-netflux.service
+echo "ExecStart=/home/download/Scripts/tv-netflux/venv/bin/gunicorn --preload --workers 12 --bind 0.0.0.0:5001 -m 007 wsgi:app --access-logfile /var/log/tv-netflux/access.log --error-logfile /var/log/tv-netflux/error.log --timeout 18000" >> /etc/systemd/system/tv-netflux.service
 echo "" >> /etc/systemd/system/tv-netflux.service
 echo "[Install]" >> /etc/systemd/system/tv-netflux.service
 echo "WantedBy=multi-user.target" >> /etc/systemd/system/tv-netflux.service
