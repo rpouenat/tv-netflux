@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+      <video id=example-video width=600 height=300 class="video-js vjs-default-skin" controls>
+        </video>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+  <script src="https://unpkg.com/video.js/dist/video.js"></script>
+  <script src="https://unpkg.com/videojs-contrib-dash/dist/videojs-dash.js"></script>
+
+  <script>
+      // var player = window.player = videojs('example-video');
+
+      // var protData = {
+      //           "org.w3.clearkey": {
+      //               "clearkeys": {
+      //                   "pzY0lmDYvh0iiEFlzUXdcw": "jeNnLiZsKWQ4dsMrWZQyJQ"
+      //               },
+      //               "priority": 0
+      //           }
+      //       };
+      
+      // var player = window.player = videojs('example-video');
+
+		// com.widevine.alpha
+
+  	// "urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b":"org.w3.clearkey",
+  	// "urn:uuid:e2719d58-a985-b3c9-781a-b030af78d30e":"org.w3.clearkey",
+  	// "urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed":"com.widevine.alpha",
+  	// "urn:uuid:9a04f079-9840-4286-ab92-e65be0885f95":"com.microsoft.playready",
+  	// "urn:uuid:79f0049a-4098-8642-ab92-e65be0885f95":"com.microsoft.playready",
+  	// "urn:uuid:f239e769-efa3-4850-9c16-a903c6932efb":"com.adobe.primetime"
+
+     const protData = {
+            "org.w3.clearkey": {
+                "clearkeys": {
+                    "nrQFDeRLSAKTLifXUIPiZg": "FmY0xnWCPCNaSpRG-tUuTQ"
+                }
+            }
+        };
+        var video,
+            player,
+            url = "https://media.axprod.net/TestVectors/v7-MultiDRM-SingleKey/Manifest_1080p_ClearKey.mpd";
+
+        video = document.querySelector("video");
+        player = dashjs.MediaPlayer().create();
+        player.initialize(video, url, true);
+        player.setProtectionData(protData);
+  </script>
+</body>
+
+</html>

@@ -26,3 +26,8 @@ TF1
 	$ live-tf1-das.cdn-0.diff.tf1.fr/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXAiOiI4Mi42Ni44Mi41NyIsImNtY2QiOiIiLCJleHAiOjE3MDk4OTk5MjAsImdpZCI6ImZmNGFmZDBhNDQxNTQyYjk4MWZkZmJhNmRjYmU5MzExIiwiaWF0IjoxNzA5ODg1NTIwLCJpc3MiOiJkZWxpdmVyeSIsIm1heGIiOjAsInN0ZW0iOiIvb3V0L3YxL2RmZTM2ZjkwOTY0OTQ3MTI5OTAyYjg0MmI4M2U2NWI0Iiwic3ViIjoiZmY0YWZkMGE0NDE1NDJiOTgxZmRmYmE2ZGNiZTkzMTEifQ.fKWTjOdLRpln3S6jNJC4zEOzsfbwpSn0pr1k_S1Du3A/out/v1/dfe36f90964947129902b842b83e65b4/index.mpd
 
 
+# https://web.dev/articles/media-eme?hl=fr
+
+Fait planter le navigateur : 
+
+	$ media.eme.enabled = False

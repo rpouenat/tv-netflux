@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <link href="https://unpkg.com/video.js@7.13.1/dist/video-js.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/video.js@7.13.1/dist/video.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/videojs-contrib-eme@5.0.1/dist/videojs-contrib-eme.min.js'></script>
+    <!-- <script src="/uaparser.min.js"></script> -->
+    <script>
+      /* var userAgent = new UAParser();
+      alert(JSON.stringify(userAgent.getBrowser())); */
+    </script>
+    <style type="text/css">
+      .vjs-matrix.video-js {
+        color: #fcca50;
+      }
+      
+      /* Change the border of the big play button. */
+      .vjs-matrix .vjs-big-play-button {
+        border-color: #fcca50;
+      }
+      
+      /* Change the color of various "bars". */
+      .vjs-matrix .vjs-volume-level,
+      .vjs-matrix .vjs-play-progress,
+      .vjs-matrix .vjs-slider-bar {
+        background: #fcca50;
+      }
+    </style>
+  </head>
+
+  <body>
+    <video
+      id="player"
+      class="video-js vjs-matrix vjs-default-skin vjs-big-play-centered"
+      style="height: 100%; width: 100%"
+      controls
+      preload="auto"
+    ></video>
+    <script type="text/javascript">
+
+      // player.src({
+      //       // normal Video.js src and type options
+      //       src: streamUri,
+      //       type: 'application/x-mpegURL',
+      //       keySystems: {
+      //           "com.apple.fps.1_0": {
+      //               certificateUri: certificateUri,
+      //               getLicense: function (emeOptions, contentId, keyMessage, callback) {
+      //                   videojs.xhr({
+      //                       uri: licenceUri,
+      //                       method: 'POST',
+      //                       responseType: 'arraybuffer',
+      //                       body: keyMessage,
+      //                       headers: {
+      //                           'Content-type': 'application/octet-stream',
+      //                           'utoken-drm': 'fp'
+      //                       }
+      //                   }, function (err, response, responseBody) {
+      //                       if (err) {
+      //                           callback(err);
+      //                           return;
+      //                       }
+
+      //                       callback(null, responseBody);
+      //                   });
+      //               }
+      //           }
+      //       }
+      //   });
+      //   player.play();
+
+
+
+
+      
+      var video = videojs("player", {
+        playbackRates: [0.5, 1, 1.5, 2],
+        autoplay: true
+      });
+      video.eme();
+      
+      video.src([
+        {
+          src:
+            "https://csm-e-m6-eb.tls1.yospace.com/csm/extlive/m6frprd01,6play-max-m6-dash.mpd?yo.d.upi=true&yo.br=false&yo.av=3&yo.hb=3500&yo.eb.fb=aHR0cHM6Ly9vcmlnaW4tMThjZDYwZGVhODE5MDUyOC5saXZlLjZjbG91ZC5mci9vdXQvdjEvMzRkNDEwZDBiM2VkNDlhMzliYTRkM2IxNmY3NzY2M2MvZGFzaF9zaG9ydF9jZW5jMTBfbTZfaGRhaW5kZXgubXBk",
+          type: 'application/dash+xml',
+          keySystems: {
+                "com.widevine.alpha": {
+                    getLicense: function (emeOptions, contentId, keyMessage, callback) {
+                        return {"service_version_info":{"license_sdk_version":"18.1.2","license_service_version":"DRMtoday"},"supported_tracks":[{"type":"AUDIO","key_id":"MwzwlmZlPtm2IaHMLv9ReA=="},{"type":"AUDIO","key_id":"kdlGe9eVMYugfEhn/0OB5w=="},{"type":"SD","key_id":"RH1/SvCfPkiV5JYOU22ZWg=="},{"type":"HD","key_id":"Qz/7pnCWPnCFeFmp3/S+BA=="},{"type":"SD","key_id":"k0vHxqApPVueJhpzJHd1Aw=="},{"type":"HD","key_id":"bhCH7zD3NmG+tfqL16SIUg=="}],"message_type":"LICENSE_REQUEST","status":"OK","license":"CAIStwYKPgoQ6wMlH8zTEL960+RhZfn/RxImChB7NP4ttNFHgrwL8DtcyfhUEAEyEDpWYnQ1/KD+H/r5o7xPE/AgASgAEh0IARABGAAgACgAOABCAEgAUABYAGABcAB4AYABABpWEhDAu+sPMzF8eI3q8knUmBixGkBprX01p0/0jTscA6XcjaSlhUdhHgKs2RuTjoTabOsJKjFBkv6hWfyvVQWPYH7U2QA0Ky4IiMjrwjfLzuPyd0jdIAEaaQoQMwzwlmZlPtm2IaHMLv9ReBIQq3XrO4x1HE0r3FssM5i/MhoQ55cYHcvmz5ltM6d9LCJ+SSACKAEyCAgAECoYACAAOggIABAqGAAgAEISChBrYzE2AAAAAOjwIEmgAAAIYgVBVURJTxppChCR2UZ715Uxi6B8SGf/Q4HnEhBR3mygH0/eo9+ZjXppMq2QGhCRmkYMkLwLHfBawbGyUxzyIAIoATIICAAQKhgAIAA6CAgAECoYACAAQhIKEGtjMTYAAAAA6PAgSaAAAAhiBUFVRElPGmYKEER9f0rwnz5IleSWDlNtmVoSEAUPmOcMdpsDGz8DCvekod4aENXtEdyFR2kL/mFpSjJVIqogAigBMggIABAqGAAgADoICAAQKhgAIABCEgoQa2MxNgAAAADo8CBJoAAACGICU0QaZgoQQz/7pnCWPnCFeFmp3/S+BBIQW0TRY5Jxontl4bX8hFYK/RoQt2UvOpmZIRGeWtllaYqcESACKAEyCAgAECoYACAAOggIABAqGAAgAEISChBrYzE2AAAAAOjwIEmgAAAIYgJIRBpmChCTS8fGoCk9W54mGnMkd3UDEhBStPH6HwREsxEkmt99rbxLGhC1hFhxzrSTrOFvcAQEeVziIAIoATIICAAQKhgAIAA6CAgAECoYACAAQhIKEGtjMTYAAAAA6PAgSaAAAAhiAlNEGmYKEG4Qh+8w9zZhvrX6i9ekiFISEEMgsp4SnYwoBS3B9QL6AR4aELaD2GnHXWXem5eKDihjL6EgAigBMggIABAqGAAgADoICAAQKhgAIABCEgoQa2MxNgAAAADo8CBJoAAACGICSEQg/76trwY4AFACGiCZxcaqNMp4Aiazh/IoTjEz5KKVe1ieLMMyb2aruu0uVCKAAawHibcaDZaJqhue6apxFRVIOu+QHsn0p6iKi52y2wWlKMGO5mF6clqkq7a5Mfp+vXHRHRvSMRSINynMPWxfjNdEXLgAsXw06z6FF/Ux/lC/0mxdSWr+HMHVxh8WYawcOyNPGGqYEH+W4FcI15IcJ0qqJ8EtCIBI4sNFDf514YcZOggKBjE4LjEuMkABSvgCAAAAAgAAAXgABQAQ6PAgSaQlfTUAAABjAAAAEAAAAHUAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAC7AAAAEAAAAM0AAAAQAAAA3wAAABAAAAAAAAAAAAAAAQsAAAAQAAABJgAAABAAAAE4AAAAEAAAAUoAAAAQAAAAAAAAAAAAAAELAAAAEAAAAZEAAAAQAAABowAAABAAAAG1AAAAEAAAAAAAAAAAAAABCwAAABAAAAH5AAAAEAAAAgsAAAAQAAACHQAAABAAAAAAAAAAAAAAAQsAAAAQAAACYQAAABAAAAJzAAAAEAAAAoUAAAAQAAAAAAAAAAAAAAELAAAAEAAAAskAAAAQAAAC2wAAABAAAALtAAAAEAAAAAAAAAAAAAABCwAAABDMtO/YWWRpx4wDjaD7iCjWd8RqaDpuEQ82gYz1RCcI/FgB","platform":"macos"}
+                    }
+                }
+            }
+        },
+      ]);
+    </script>
+  </body>
+</html>
