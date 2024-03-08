@@ -27,8 +27,8 @@ def getUrlFranceTV(chaine_name):
 
 	start = time.time()
 
-	user_francetv = "ronan.pouenat@yahoo.fr"
-	password_francetv = "N4N&*5dHr9VEsk"
+	user_francetv = "georgesdupont2128@protonmail.com"
+	password_francetv = "YS;=MYiUL:2wmL7"
 
 	error = ""
 	data_output = {}
