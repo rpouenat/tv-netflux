@@ -33,6 +33,8 @@ def getUrlFranceTV(chaine_name):
 	error = ""
 	data_output = {}
 	data_output["url"] = ""
+	# On set le type de vidéo récupéré
+	data_output["type"] = "application/x-mpegURL"
 
 	# Si on a choisi la bonne chaine
 	if chaine_name in [ "france-2", "france-3", "france-4", "france-5", "franceinfo" ]:
