@@ -31,3 +31,7 @@ TF1
 Fait planter le navigateur : 
 
 	$ media.eme.enabled = False
+
+
+# https://github.com/davidjamesherzog/videojs-shaka
+# "shakaConfig":{"drm":{"preferredKeySystems":["com.microsoft.playready.recommendation","com.widevine.alpha"]}}

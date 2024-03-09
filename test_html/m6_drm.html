@@ -37,61 +37,65 @@
     ></video>
     <script type="text/javascript">
 
-      // player.src({
-      //       // normal Video.js src and type options
-      //       src: streamUri,
-      //       type: 'application/x-mpegURL',
-      //       keySystems: {
-      //           "com.apple.fps.1_0": {
-      //               certificateUri: certificateUri,
-      //               getLicense: function (emeOptions, contentId, keyMessage, callback) {
-      //                   videojs.xhr({
-      //                       uri: licenceUri,
-      //                       method: 'POST',
-      //                       responseType: 'arraybuffer',
-      //                       body: keyMessage,
-      //                       headers: {
-      //                           'Content-type': 'application/octet-stream',
-      //                           'utoken-drm': 'fp'
-      //                       }
-      //                   }, function (err, response, responseBody) {
-      //                       if (err) {
-      //                           callback(err);
-      //                           return;
-      //                       }
-
-      //                       callback(null, responseBody);
-      //                   });
-      //               }
-      //           }
-      //       }
-      //   });
-      //   player.play();
-
-
-
-
-      
-      var video = videojs("player", {
-        playbackRates: [0.5, 1, 1.5, 2],
-        autoplay: true
-      });
-      video.eme();
-      
-      video.src([
-        {
-          src:
-            "https://csm-e-m6-eb.tls1.yospace.com/csm/extlive/m6frprd01,6play-max-m6-dash.mpd?yo.d.upi=true&yo.br=false&yo.av=3&yo.hb=3500&yo.eb.fb=aHR0cHM6Ly9vcmlnaW4tMThjZDYwZGVhODE5MDUyOC5saXZlLjZjbG91ZC5mci9vdXQvdjEvMzRkNDEwZDBiM2VkNDlhMzliYTRkM2IxNmY3NzY2M2MvZGFzaF9zaG9ydF9jZW5jMTBfbTZfaGRhaW5kZXgubXBk",
-          type: 'application/dash+xml',
-          keySystems: {
+      var player = window.player = videojs('player');
+      streamUri = "https://csm-e-cem6aeuw1lived208-0b0b532fd638e05d4.bln1.yospace.com/csm/extlive/m6frprd01,6play-max-m6-dash.mpd?yo.d.upi=true&yo.br=false&yo.av=3&yo.hb=3500&yo.eb.fb=aHR0cHM6Ly9vcmlnaW4tMThjZDYwZGVhODE5MDUyOC5saXZlLjZjbG91ZC5mci9vdXQvdjEvMzRkNDEwZDBiM2VkNDlhMzliYTRkM2IxNmY3NzY2M2MvZGFzaF9zaG9ydF9jZW5jMTBfbTZfaGRhaW5kZXgubXBk&yo.oh=Y3NtLWUtbTYtZWIudGxzMS55b3NwYWNlLmNvbQ=="
+      licenceUri= "https://lic.drmtoday.com/license-proxy-widevine/cenc/"
+      player.src({
+            // normal Video.js src and type options
+            src: streamUri,
+            type: 'application/dash+xml',
+            keySystems: {
                 "com.widevine.alpha": {
+                    certificateUri: "https://lic.drmtoday.com/license-server-fairplay/cert/m6",
                     getLicense: function (emeOptions, contentId, keyMessage, callback) {
-                        return {"service_version_info":{"license_sdk_version":"18.1.2","license_service_version":"DRMtoday"},"supported_tracks":[{"type":"AUDIO","key_id":"MwzwlmZlPtm2IaHMLv9ReA=="},{"type":"AUDIO","key_id":"kdlGe9eVMYugfEhn/0OB5w=="},{"type":"SD","key_id":"RH1/SvCfPkiV5JYOU22ZWg=="},{"type":"HD","key_id":"Qz/7pnCWPnCFeFmp3/S+BA=="},{"type":"SD","key_id":"k0vHxqApPVueJhpzJHd1Aw=="},{"type":"HD","key_id":"bhCH7zD3NmG+tfqL16SIUg=="}],"message_type":"LICENSE_REQUEST","status":"OK","license":"CAIStwYKPgoQ6wMlH8zTEL960+RhZfn/RxImChB7NP4ttNFHgrwL8DtcyfhUEAEyEDpWYnQ1/KD+H/r5o7xPE/AgASgAEh0IARABGAAgACgAOABCAEgAUABYAGABcAB4AYABABpWEhDAu+sPMzF8eI3q8knUmBixGkBprX01p0/0jTscA6XcjaSlhUdhHgKs2RuTjoTabOsJKjFBkv6hWfyvVQWPYH7U2QA0Ky4IiMjrwjfLzuPyd0jdIAEaaQoQMwzwlmZlPtm2IaHMLv9ReBIQq3XrO4x1HE0r3FssM5i/MhoQ55cYHcvmz5ltM6d9LCJ+SSACKAEyCAgAECoYACAAOggIABAqGAAgAEISChBrYzE2AAAAAOjwIEmgAAAIYgVBVURJTxppChCR2UZ715Uxi6B8SGf/Q4HnEhBR3mygH0/eo9+ZjXppMq2QGhCRmkYMkLwLHfBawbGyUxzyIAIoATIICAAQKhgAIAA6CAgAECoYACAAQhIKEGtjMTYAAAAA6PAgSaAAAAhiBUFVRElPGmYKEER9f0rwnz5IleSWDlNtmVoSEAUPmOcMdpsDGz8DCvekod4aENXtEdyFR2kL/mFpSjJVIqogAigBMggIABAqGAAgADoICAAQKhgAIABCEgoQa2MxNgAAAADo8CBJoAAACGICU0QaZgoQQz/7pnCWPnCFeFmp3/S+BBIQW0TRY5Jxontl4bX8hFYK/RoQt2UvOpmZIRGeWtllaYqcESACKAEyCAgAECoYACAAOggIABAqGAAgAEISChBrYzE2AAAAAOjwIEmgAAAIYgJIRBpmChCTS8fGoCk9W54mGnMkd3UDEhBStPH6HwREsxEkmt99rbxLGhC1hFhxzrSTrOFvcAQEeVziIAIoATIICAAQKhgAIAA6CAgAECoYACAAQhIKEGtjMTYAAAAA6PAgSaAAAAhiAlNEGmYKEG4Qh+8w9zZhvrX6i9ekiFISEEMgsp4SnYwoBS3B9QL6AR4aELaD2GnHXWXem5eKDihjL6EgAigBMggIABAqGAAgADoICAAQKhgAIABCEgoQa2MxNgAAAADo8CBJoAAACGICSEQg/76trwY4AFACGiCZxcaqNMp4Aiazh/IoTjEz5KKVe1ieLMMyb2aruu0uVCKAAawHibcaDZaJqhue6apxFRVIOu+QHsn0p6iKi52y2wWlKMGO5mF6clqkq7a5Mfp+vXHRHRvSMRSINynMPWxfjNdEXLgAsXw06z6FF/Ux/lC/0mxdSWr+HMHVxh8WYawcOyNPGGqYEH+W4FcI15IcJ0qqJ8EtCIBI4sNFDf514YcZOggKBjE4LjEuMkABSvgCAAAAAgAAAXgABQAQ6PAgSaQlfTUAAABjAAAAEAAAAHUAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAC7AAAAEAAAAM0AAAAQAAAA3wAAABAAAAAAAAAAAAAAAQsAAAAQAAABJgAAABAAAAE4AAAAEAAAAUoAAAAQAAAAAAAAAAAAAAELAAAAEAAAAZEAAAAQAAABowAAABAAAAG1AAAAEAAAAAAAAAAAAAABCwAAABAAAAH5AAAAEAAAAgsAAAAQAAACHQAAABAAAAAAAAAAAAAAAQsAAAAQAAACYQAAABAAAAJzAAAAEAAAAoUAAAAQAAAAAAAAAAAAAAELAAAAEAAAAskAAAAQAAAC2wAAABAAAALtAAAAEAAAAAAAAAAAAAABCwAAABDMtO/YWWRpx4wDjaD7iCjWd8RqaDpuEQ82gYz1RCcI/FgB","platform":"macos"}
+                        videojs.xhr({
+                            uri: licenceUri,
+                            method: 'POST',
+                            responseType: 'arraybuffer',
+                            body: keyMessage,
+                            headers: {
+                                'User-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:123.0) Gecko/20100101 Firefox/123.0',
+                                'Host': 'lic.drmtoday.com',
+                                'x-dt-auth-token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJvcHREYXRhIjoie1widXNlcklkXCI6XCIyMDZhMmJkNDE2MTU0ZWNkYTk4ZTYwOGNiNmQ3MzU4YlwiLFwibWVyY2hhbnRcIjpcIm02XCIsXCJzZXNzaW9uSWRcIjpcIjZwbGF5XCJ9IiwiY3J0IjoiW3tcImFjY291bnRpbmdJZFwiOlwiXCIsXCJhc3NldElkXCI6XCJkYXNoY2VuY19NNlwiLFwicHJvZmlsZVwiOntcInB1cmNoYXNlXCI6e319LFwib3V0cHV0UHJvdGVjdGlvblwiOntcImRpZ2l0YWxcIjpmYWxzZSxcImFuYWxvZ3VlXCI6ZmFsc2UsXCJlbmZvcmNlXCI6ZmFsc2V9LFwib3BcIjp7XCJjb25maWdcIjp7XCJIRFwiOntcIlBsYXlSZWFkeVwiOntcIm1pblNMXCI6MzAwMCxcImFuYWxvZ1ZpZGVvT1BMXCI6MTUwLFw…1MH0sXCJXaWRldmluZU1cIjp7XCJtaW5TTFwiOjEsXCJyZXF1aXJlSERDUFwiOlwiSERDUF9OT05FXCJ9fSxcIlZJREVPX0FVRElPXCI6e1wiUGxheVJlYWR5XCI6e1wibWluU0xcIjoyMDAwLFwiYW5hbG9nVmlkZW9PUExcIjoxMDAsXCJjb21wcmVzc2VkRGlnaXRhbFZpZGVvT1BMXCI6NTAwLFwidW5jb21wcmVzc2VkRGlnaXRhbFZpZGVvT1BMXCI6MjUwfSxcIldpZGV2aW5lTVwiOntcIm1pblNMXCI6MSxcInJlcXVpcmVIRENQXCI6XCJIRENQX05PTkVcIn19fX19XSIsImlhdCI6MTcwOTkzOTQyMiwianRpIjoiUTdNdGZmNTgwajBBT1gvRHU1eFMzdz09In0.x8gOyiqtaUEUeeJF9QM8JE8d4PJ-pFHlij0aIYQRrRKwLKk8bz4XiCs6l_ZVTS7_ssDWJUQk56kClZhUm9q71Q'
+                            }
+                        }, function (err, response, responseBody) {
+                            if (err) {
+                                callback(err);
+                                return;
+                            }
+
+                            callback(null, responseBody);
+                        });
                     }
                 }
             }
-        },
-      ]);
+        });
+        player.play();
+
+
+
+
+      
+      // var video = videojs("player", {
+      //   playbackRates: [0.5, 1, 1.5, 2],
+      //   autoplay: true
+      // });
+      // video.eme();
+      
+      // video.src([
+      //   {
+      //     src:
+      //       "https://csm-e-m6-eb.tls1.yospace.com/csm/extlive/m6frprd01,6play-max-m6-dash.mpd?yo.d.upi=true&yo.br=false&yo.av=3&yo.hb=3500&yo.eb.fb=aHR0cHM6Ly9vcmlnaW4tMThjZDYwZGVhODE5MDUyOC5saXZlLjZjbG91ZC5mci9vdXQvdjEvMzRkNDEwZDBiM2VkNDlhMzliYTRkM2IxNmY3NzY2M2MvZGFzaF9zaG9ydF9jZW5jMTBfbTZfaGRhaW5kZXgubXBk",
+      //     type: 'application/dash+xml',
+      //     keySystems: {
+      //           "com.widevine.alpha": {
+      //               getLicense: function (emeOptions, contentId, keyMessage, callback) {
+      //                   return {"service_version_info":{"license_sdk_version":"18.1.2","license_service_version":"DRMtoday"},"supported_tracks":[{"type":"AUDIO","key_id":"MwzwlmZlPtm2IaHMLv9ReA=="},{"type":"AUDIO","key_id":"kdlGe9eVMYugfEhn/0OB5w=="},{"type":"SD","key_id":"RH1/SvCfPkiV5JYOU22ZWg=="},{"type":"HD","key_id":"Qz/7pnCWPnCFeFmp3/S+BA=="},{"type":"SD","key_id":"k0vHxqApPVueJhpzJHd1Aw=="},{"type":"HD","key_id":"bhCH7zD3NmG+tfqL16SIUg=="}],"message_type":"LICENSE_REQUEST","status":"OK","license":"CAIStwYKPgoQ6wMlH8zTEL960+RhZfn/RxImChB7NP4ttNFHgrwL8DtcyfhUEAEyEDpWYnQ1/KD+H/r5o7xPE/AgASgAEh0IARABGAAgACgAOABCAEgAUABYAGABcAB4AYABABpWEhDAu+sPMzF8eI3q8knUmBixGkBprX01p0/0jTscA6XcjaSlhUdhHgKs2RuTjoTabOsJKjFBkv6hWfyvVQWPYH7U2QA0Ky4IiMjrwjfLzuPyd0jdIAEaaQoQMwzwlmZlPtm2IaHMLv9ReBIQq3XrO4x1HE0r3FssM5i/MhoQ55cYHcvmz5ltM6d9LCJ+SSACKAEyCAgAECoYACAAOggIABAqGAAgAEISChBrYzE2AAAAAOjwIEmgAAAIYgVBVURJTxppChCR2UZ715Uxi6B8SGf/Q4HnEhBR3mygH0/eo9+ZjXppMq2QGhCRmkYMkLwLHfBawbGyUxzyIAIoATIICAAQKhgAIAA6CAgAECoYACAAQhIKEGtjMTYAAAAA6PAgSaAAAAhiBUFVRElPGmYKEER9f0rwnz5IleSWDlNtmVoSEAUPmOcMdpsDGz8DCvekod4aENXtEdyFR2kL/mFpSjJVIqogAigBMggIABAqGAAgADoICAAQKhgAIABCEgoQa2MxNgAAAADo8CBJoAAACGICU0QaZgoQQz/7pnCWPnCFeFmp3/S+BBIQW0TRY5Jxontl4bX8hFYK/RoQt2UvOpmZIRGeWtllaYqcESACKAEyCAgAECoYACAAOggIABAqGAAgAEISChBrYzE2AAAAAOjwIEmgAAAIYgJIRBpmChCTS8fGoCk9W54mGnMkd3UDEhBStPH6HwREsxEkmt99rbxLGhC1hFhxzrSTrOFvcAQEeVziIAIoATIICAAQKhgAIAA6CAgAECoYACAAQhIKEGtjMTYAAAAA6PAgSaAAAAhiAlNEGmYKEG4Qh+8w9zZhvrX6i9ekiFISEEMgsp4SnYwoBS3B9QL6AR4aELaD2GnHXWXem5eKDihjL6EgAigBMggIABAqGAAgADoICAAQKhgAIABCEgoQa2MxNgAAAADo8CBJoAAACGICSEQg/76trwY4AFACGiCZxcaqNMp4Aiazh/IoTjEz5KKVe1ieLMMyb2aruu0uVCKAAawHibcaDZaJqhue6apxFRVIOu+QHsn0p6iKi52y2wWlKMGO5mF6clqkq7a5Mfp+vXHRHRvSMRSINynMPWxfjNdEXLgAsXw06z6FF/Ux/lC/0mxdSWr+HMHVxh8WYawcOyNPGGqYEH+W4FcI15IcJ0qqJ8EtCIBI4sNFDf514YcZOggKBjE4LjEuMkABSvgCAAAAAgAAAXgABQAQ6PAgSaQlfTUAAABjAAAAEAAAAHUAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAC7AAAAEAAAAM0AAAAQAAAA3wAAABAAAAAAAAAAAAAAAQsAAAAQAAABJgAAABAAAAE4AAAAEAAAAUoAAAAQAAAAAAAAAAAAAAELAAAAEAAAAZEAAAAQAAABowAAABAAAAG1AAAAEAAAAAAAAAAAAAABCwAAABAAAAH5AAAAEAAAAgsAAAAQAAACHQAAABAAAAAAAAAAAAAAAQsAAAAQAAACYQAAABAAAAJzAAAAEAAAAoUAAAAQAAAAAAAAAAAAAAELAAAAEAAAAskAAAAQAAAC2wAAABAAAALtAAAAEAAAAAAAAAAAAAABCwAAABDMtO/YWWRpx4wDjaD7iCjWd8RqaDpuEQ82gYz1RCcI/FgB","platform":"macos"}
+      //               }
+      //           }
+      //       }
+      //   },
+      // ]);
     </script>
   </body>
 </html>
