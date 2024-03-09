@@ -1,5 +1,6 @@
 
 from . import api
+import time
 from flask import render_template, request, jsonify
 from .functions.functions import json_return, facebookNotification
 from .groupetf1.groupetf1 import getUrlGroupeTF1
@@ -15,6 +16,7 @@ def getTVURL(chaine_name):
 	error = ""
 	data_output = {}
 	data_output["url"] = ""
+	start = time.time()
 
 	# Si la chaine appartient au groupe tf1
 	if chaine_name in [ "tf1", "tmc", "tfx", "lci", "tf1sf" ]:
@@ -23,11 +25,19 @@ def getTVURL(chaine_name):
 	# Chaine du groupe france télévision
 	elif chaine_name in [ "france-2", "france-3", "france-4", "france-5", "franceinfo" ]:
 		error, data_output = getUrlFranceTV(chaine_name)
+
 	# Arte
 	elif chaine_name == "arte":
 		error, data_output = getArteURL()
+
+	# Tout tout autre chaine
 	else:
 		error = "Unknown TV"
+
+	end = time.time()
+	time_exec = end - start
+	data_output["time_exec"] = time_exec
+	print("[+] Temps : " + str(time_exec))
 
 
 	# Si on a pas d'erreur 

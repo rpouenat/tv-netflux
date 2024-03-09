@@ -10,7 +10,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import json
-import time
 
 
 # Permet de récupérer tous les commentaires pour un media
@@ -22,8 +21,6 @@ def getUrlFranceTV(chaine_name):
 	# france-4
 	# france-5
 	# franceinfo
-
-	start = time.time()
 
 	user_francetv = "georgesdupont2128@protonmail.com"
 	password_francetv = "YS;=MYiUL:2wmL7"
@@ -95,11 +92,6 @@ def getUrlFranceTV(chaine_name):
 					message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
 					message += "\t- " + json_data["url"]
 					facebookNotification(message)
-
-				end = time.time()
-				time_exec = end - start
-				data_output["time_exec"] = time_exec
-				print("[+] Temps : " + str(time_exec))
 
 	else:
 		error = "Unknown TV"

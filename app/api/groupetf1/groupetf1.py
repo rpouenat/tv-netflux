@@ -18,7 +18,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
 import json
-import time
 
 
 # Permet de récupérer tous les commentaires pour un media
@@ -30,8 +29,6 @@ def getUrlGroupeTF1(chaine_name):
 	# france-4
 	# france-5
 	# franceinfo
-
-	start = time.time()
 
 	error = ""
 	user_groupetf1 = "georgesdupont2128@protonmail.com"
@@ -131,11 +128,6 @@ def getUrlGroupeTF1(chaine_name):
 					message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
 					message += "\t- " + req.url
 					facebookNotification(message)
-
-				end = time.time()
-				time_exec = end - start
-				data_output["time_exec"] = time_exec
-				print("[+] Temps : " + str(time_exec))
 
 	else:
 		error = "Unknown TV"
