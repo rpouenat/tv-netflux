@@ -2,11 +2,9 @@
 from flask import render_template, request, jsonify
 from ..functions.functions import json_return, facebookNotification
 import requests
-from .. import api
 
 
 # Permet de récupérer tous les commentaires pour un media
-@api.route('/arte', methods=['GET'])
 def getArteURL():
 
 	error = ""
@@ -25,15 +23,8 @@ def getArteURL():
 			if stream["versions"][0]["code"] == "liveFR":
 				data_output["url"] = stream["url"]
 				break
-
 	else:
 		error = "Error status."
 
-	# Si on a pas d'erreur 
-	if not error and data_output["url"]:
-		d = json_return("",200,data_output)
-	else:
-		d = json_return(error,400,"")
-
-	return jsonify(d),200
+	return error, data_output
 

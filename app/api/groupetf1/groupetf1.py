@@ -8,7 +8,6 @@
 from flask import render_template, request, jsonify
 from ..functions.functions import json_return, facebookNotification
 from flask import current_app
-from .. import api
 
 from seleniumwire import webdriver
 from seleniumwire.utils import decode as sw_decode
@@ -23,7 +22,6 @@ import time
 
 
 # Permet de récupérer tous les commentaires pour un media
-@api.route('/groupetf1/<string:chaine_name>', methods=['GET'])
 def getUrlGroupeTF1(chaine_name):
 
 	# Possibilité de chaine 
@@ -35,10 +33,9 @@ def getUrlGroupeTF1(chaine_name):
 
 	start = time.time()
 
+	error = ""
 	user_groupetf1 = "georgesdupont2128@protonmail.com"
 	password_groupetf1 = "YS;=MYiUL:2wmL7"
-
-	error = ""
 	data_output = {}
 	data_output["url"] = ""
 	# On set le type de vidéo récupéré
@@ -51,7 +48,11 @@ def getUrlGroupeTF1(chaine_name):
 	# https://www.tf1.fr/notre-planete-98498093/direct ?
 
 	# Si on a choisi la bonne chaine
-	if chaine_name in [ "tf1", "tmc", "tfx", "lci" ]:
+	if chaine_name in [ "tf1", "tmc", "tfx", "lci", "tf1sf" ]:
+
+		# Si c'est tf1sf (Pour TF1 série Films) on remplace
+		if chaine_name == "tf1sf":
+			chaine_name = "tsf"
 
 		chrome_options = webdriver.ChromeOptions()
 		chrome_options.add_argument('--headless')
@@ -139,24 +140,7 @@ def getUrlGroupeTF1(chaine_name):
 	else:
 		error = "Unknown TV"
 
-
-	# Si on a pas d'erreur 
-	if not error and data_output["url"]:
-		d = json_return("",200,data_output)
-	else:
-		d = json_return(error,400,"")
-
-	return jsonify(d),200
-
-
-
-
-# Permet de récupérer tous les commentaires pour un media
-@api.route('/licenceM6', methods=['POST'])
-def getLicenceM6():
-	data_output = {"service_version_info":{"license_sdk_version":"18.1.2","license_service_version":"DRMtoday"},"supported_tracks":[{"type":"SD","key_id":"RH1/SvCfPkiV5JYOU22ZWg=="},{"type":"SD","key_id":"k0vHxqApPVueJhpzJHd1Aw=="},{"type":"HD","key_id":"Qz/7pnCWPnCFeFmp3/S+BA=="},{"type":"AUDIO","key_id":"MwzwlmZlPtm2IaHMLv9ReA=="},{"type":"HD","key_id":"bhCH7zD3NmG+tfqL16SIUg=="},{"type":"AUDIO","key_id":"kdlGe9eVMYugfEhn/0OB5w=="}],"message_type":"LICENSE_REQUEST","status":"OK","license":"CAIStwYKPgoQRl79npEeIxVv2BF60UJKKxImChCQb8MTgABBXKrqaqide+SoEAEyEDpWYnQ1/KD+H/r5o7xPE/AgASgAEh0IARABGAAgACgAOABCAEgAUABYAGABcAB4AYABABpWEhDqoH/h8F3fvSVws+r87UEAGkAoJCcoUd78K3yKKsPD8PUibYQFThvBmD/+tkTwHZceJ6de5Rl5T2a2QJYIeQZ44tOz5wfPXRaqXriKW8dm/V4nIAEaZgoQRH1/SvCfPkiV5JYOU22ZWhIQfhYKlQaXGfmk7izMUmBpkhoQ9DO7FGCHTInda12qWPMxCiACKAEyCAgAECoYACAAOggIABAqGAAgAEISChBrYzE2AAAAAKynB4WgAAAIYgJTRBpmChCTS8fGoCk9W54mGnMkd3UDEhATYzQtFSulV3ZoGhjZZe2GGhAAxRGauhFtMmhFE1lSJ613IAIoATIICAAQKhgAIAA6CAgAECoYACAAQhIKEGtjMTYAAAAArKcHhaAAAAhiAlNEGmYKEEM/+6Zwlj5whXhZqd/0vgQSEA9FN3HMPn66EZg6f9Hxq2IaEHsDNY3Q2arRjz/HgzQP+IMgAigBMggIABAqGAAgADoICAAQKhgAIABCEgoQa2MxNgAAAACspweFoAAACGICSEQaaQoQMwzwlmZlPtm2IaHMLv9ReBIQmbmlZVh4vn8+4LOdf1DoRhoQxw80YJCJaKH5UROpRMyEaSACKAEyCAgAECoYACAAOggIABAqGAAgAEISChBrYzE2AAAAAKynB4WgAAAIYgVBVURJTxpmChBuEIfvMPc2Yb61+ovXpIhSEhDF+Zj7FhPfqb6FlJPPTWgcGhAm1kjpDLUvi8bHJsJA/Bl2IAIoATIICAAQKhgAIAA6CAgAECoYACAAQhIKEGtjMTYAAAAArKcHhaAAAAhiAkhEGmkKEJHZRnvXlTGLoHxIZ/9DgecSEAL2jSdjufqxPwrnNjLxKqcaEPDqQ7oLPg10oaPvcmK8/aIgAigBMggIABAqGAAgADoICAAQKhgAIABCEgoQa2MxNgAAAACspweFoAAACGIFQVVESU8gpI2urwY4AFACGiBHEg4OkLvlgwTH3gluvbXXBin8OZGnhq3PH+1ROaJJ6CKAAUtkZ1qGwaDtHMpxzmr3nKOieq6ykBr1qmcVGDjBR+tsyyplO9uRVVsDRkVVh0AT6xVI1Zo9n+w6M9mNkN7oJPFjZaqFyilnvaDbVu9QqKVcZtdrbtDdi9XbMgtG8BFBho+mangOlOCBTwTKGlDBrkPXfnYiLa0DnSIwdwG4k7UWOggKBjE4LjEuMkABSvgCAAAAAgAAAXgABQAQrKcHha6hgikAAABjAAAAEAAAAHUAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAC7AAAAEAAAAM0AAAAQAAAA3wAAABAAAAAAAAAAAAAAAQsAAAAQAAABIwAAABAAAAE1AAAAEAAAAUcAAAAQAAAAAAAAAAAAAAELAAAAEAAAAYsAAAAQAAABnQAAABAAAAGvAAAAEAAAAAAAAAAAAAABCwAAABAAAAHzAAAAEAAAAgUAAAAQAAACFwAAABAAAAAAAAAAAAAAAQsAAAAQAAACXgAAABAAAAJwAAAAEAAAAoIAAAAQAAAAAAAAAAAAAAELAAAAEAAAAsYAAAAQAAAC2AAAABAAAALqAAAAEAAAAAAAAAAAAAABCwAAABDn5Q5f7ax39aFVVYbXge/RtYrGKdOm5fkKRV6sbpj7VFgB","platform":"macos"}
-	d = json_return("",200,data_output)
-	return jsonify(d),200
+	return error, data_output
 
 
 

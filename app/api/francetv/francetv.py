@@ -1,7 +1,6 @@
 from flask import render_template, request, jsonify
 from ..functions.functions import json_return, facebookNotification
 from flask import current_app
-from .. import api
 
 from seleniumwire import webdriver
 from seleniumwire.utils import decode as sw_decode
@@ -15,7 +14,6 @@ import time
 
 
 # Permet de récupérer tous les commentaires pour un media
-@api.route('/franceTV/<string:chaine_name>', methods=['GET'])
 def getUrlFranceTV(chaine_name):
 
 	# Possibilité de chaine 
@@ -106,12 +104,5 @@ def getUrlFranceTV(chaine_name):
 	else:
 		error = "Unknown TV"
 
-
-	# Si on a pas d'erreur 
-	if not error and data_output["url"]:
-		d = json_return("",200,data_output)
-	else:
-		d = json_return(error,400,"")
-
-	return jsonify(d),200
+	return error, data_output
 
