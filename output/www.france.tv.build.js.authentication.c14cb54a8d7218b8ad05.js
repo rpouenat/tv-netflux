@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkvideo_front_web=self.webpackChunkvideo_front_web||[]).push([[2950],{5634:(e,n,t)=>{var r=t(8338),d=()=>{addEventListener("logoutUser",(()=>{(0,r.h_)()}))},o=()=>{d(),(0,r.YR)()};window.addEventListener("DOMContentLoaded",(()=>{o()}))}},e=>{e.O(0,[202,5407,8338],(()=>{return n=5634,e(e.s=n);var n}));e.O()}]);

@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import TimeoutException
 import json
 import time
 
@@ -67,14 +68,33 @@ def getUrlFranceTV(chaine_name):
 		# driver.get('https://www.france.tv/france-2/direct.html')
 		driver.get('https://www.france.tv/'+chaine_name+'/direct.html')
 
-		time.sleep(3)
+		test_addblock = False
+		try:
+			# On attends que la page ait chargée
+			elem = WebDriverWait(driver, 3).until(
+				EC.presence_of_element_located((By.CLASS_NAME, "js-hide-adblock")) #This is a dummy element
+			)
+			test_addblock = True
+		except TimeoutException:
+			# On attends que la page ait chargée
+			elem = WebDriverWait(driver, 3).until(
+				EC.presence_of_element_located((By.ID, "js-hide-adblock")) #This is a dummy element
+			)
 
-		# driver.save_screenshot('direct.png')
+		if test_addblock:
+			# On désactive le bouton js-hide-adblock
+			button_bypassadblock = driver.find_element(By.CLASS_NAME, "js-hide-adblock")
+			button_bypassadblock.click()
+
+		time.sleep(8)
+
+		driver.save_screenshot('direct.png')
 
 		# On parcourt les requêtes du navigateur
 		for req in driver.requests:
+			# print("[+] URL : " + req.url)
 			if ("esi/TA".lower() in req.url.lower()) and ("format=json" in req.url.lower()):
-				# print("[+] URL : " + req.url)
+				print("[+] URL : " + req.url)
 				data = sw_decode(req.response.body, req.response.headers.get('Content-Encoding', 'identity'))
 				json_data = json.loads(data.decode("utf8"))
 
