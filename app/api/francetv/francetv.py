@@ -71,15 +71,12 @@ def getUrlFranceTV(chaine_name):
 		test_addblock = False
 		try:
 			# On attends que la page ait chargée
-			elem = WebDriverWait(driver, 3).until(
+			elem = WebDriverWait(driver, 4).until(
 				EC.presence_of_element_located((By.CLASS_NAME, "js-hide-adblock")) #This is a dummy element
 			)
 			test_addblock = True
 		except TimeoutException:
-			# On attends que la page ait chargée
-			elem = WebDriverWait(driver, 3).until(
-				EC.presence_of_element_located((By.ID, "js-hide-adblock")) #This is a dummy element
-			)
+			pass
 
 		if test_addblock:
 			# On désactive le bouton js-hide-adblock
