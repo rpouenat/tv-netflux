@@ -102,33 +102,40 @@ def getUrlGroupeTF1(chaine_name):
 
 		# driver.save_screenshot('direct.png')
 
-		time.sleep(8)
-
 		# driver.save_screenshot('direct.png')
 
+		max_try = 10
+		i = 0
+		url_find = False
 
-		# live-tf1-das.cdn-0.diff.tf1.fr/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXAiOiI4Mi42Ni44Mi41NyIsImNtY2QiOiIiLCJleHAiOjE3MDk4OTk5MjAsImdpZCI6ImZmNGFmZDBhNDQxNTQyYjk4MWZkZmJhNmRjYmU5MzExIiwiaWF0IjoxNzA5ODg1NTIwLCJpc3MiOiJkZWxpdmVyeSIsIm1heGIiOjAsInN0ZW0iOiIvb3V0L3YxL2RmZTM2ZjkwOTY0OTQ3MTI5OTAyYjg0MmI4M2U2NWI0Iiwic3ViIjoiZmY0YWZkMGE0NDE1NDJiOTgxZmRmYmE2ZGNiZTkzMTEifQ.fKWTjOdLRpln3S6jNJC4zEOzsfbwpSn0pr1k_S1Du3A/out/v1/dfe36f90964947129902b842b83e65b4/index.mpd
-		# On parcourt les requêtes du navigateur
-		for req in driver.requests:
-			if ("out/v1".lower() in req.url.lower()) and ("index.mpd" in req.url.lower()):
-				print("[+] URL : " + req.url)
+		# Tant qu'on a pas l'url on attends
+		while (not url_find) and (i < max_try):
 
-				# On remplace l'url
-				# Si on est en production
-				if current_app.config.get('env') == "production":
-					data_output["url"] = req.url.replace("https://live-"+chaine_name+"-das.cdn-0.diff.tf1.fr/", "https://netflux.fun:2083/tv/" + chaine_name + "/")
-				else:
-					data_output["url"] = req.url.replace("https://live-"+chaine_name+"-das.cdn-0.diff.tf1.fr/", "https://netflux.fun:2087/tv/" + chaine_name + "/")
+			# live-tf1-das.cdn-0.diff.tf1.fr/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXAiOiI4Mi42Ni44Mi41NyIsImNtY2QiOiIiLCJleHAiOjE3MDk4OTk5MjAsImdpZCI6ImZmNGFmZDBhNDQxNTQyYjk4MWZkZmJhNmRjYmU5MzExIiwiaWF0IjoxNzA5ODg1NTIwLCJpc3MiOiJkZWxpdmVyeSIsIm1heGIiOjAsInN0ZW0iOiIvb3V0L3YxL2RmZTM2ZjkwOTY0OTQ3MTI5OTAyYjg0MmI4M2U2NWI0Iiwic3ViIjoiZmY0YWZkMGE0NDE1NDJiOTgxZmRmYmE2ZGNiZTkzMTEifQ.fKWTjOdLRpln3S6jNJC4zEOzsfbwpSn0pr1k_S1Du3A/out/v1/dfe36f90964947129902b842b83e65b4/index.mpd
+			# On parcourt les requêtes du navigateur
+			for req in driver.requests:
+				if ("out/v1".lower() in req.url.lower()) and ("index.mpd" in req.url.lower()):
+					print("[+] URL : " + req.url)
 
-				# On vérifie qu'on a bien netflux.fun dans l'url
-				if "netflux.fun" not in data_output["url"]:
-					data_output["url"] = ""
-					error = "Bad Link"
-					# On envoie un message facebook
-					message = "BUG Application TV : \n\n"
-					message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
-					message += "\t- " + req.url
-					facebookNotification(message)
+					# On remplace l'url
+					# Si on est en production
+					if current_app.config.get('env') == "production":
+						data_output["url"] = req.url.replace("https://live-"+chaine_name+"-das.cdn-0.diff.tf1.fr/", "https://netflux.fun:2083/tv/" + chaine_name + "/")
+					else:
+						data_output["url"] = req.url.replace("https://live-"+chaine_name+"-das.cdn-0.diff.tf1.fr/", "https://netflux.fun:2087/tv/" + chaine_name + "/")
+
+					url_find = True
+					# On vérifie qu'on a bien netflux.fun dans l'url
+					if "netflux.fun" not in data_output["url"]:
+						data_output["url"] = ""
+						error = "Bad Link"
+						# On envoie un message facebook
+						message = "BUG Application TV : \n\n"
+						message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
+						message += "\t- " + req.url
+						facebookNotification(message)
+			i += 1
+			time.sleep(1)
 
 		# On ferme le driver
 		driver.quit()

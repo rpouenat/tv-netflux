@@ -86,33 +86,42 @@ def getUrlFranceTV(chaine_name):
 			button_bypassadblock = driver.find_element(By.CLASS_NAME, "js-hide-adblock")
 			button_bypassadblock.click()
 
-		time.sleep(8)
 
-		# driver.save_screenshot('direct.png')
+		max_try = 10
+		i = 0
+		url_find = False
 
-		# On parcourt les requêtes du navigateur
-		for req in driver.requests:
-			# print("[+] URL : " + req.url)
-			if ("esi/TA".lower() in req.url.lower()) and ("format=json" in req.url.lower()):
-				print("[+] URL : " + req.url)
-				data = sw_decode(req.response.body, req.response.headers.get('Content-Encoding', 'identity'))
-				json_data = json.loads(data.decode("utf8"))
+		# Tant qu'on a pas l'url on attends
+		while (not url_find) and (i < max_try):
 
-				# Si on est en production
-				if current_app.config.get('env') == "production":
-					data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/")
-				else:
-					data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/")
+			# driver.save_screenshot('direct.png')
 
-				# On vérifie qu'on a bien netflux.fun dans l'url
-				if "netflux.fun" not in data_output["url"]:
-					data_output["url"] = ""
-					error = "Bad Link"
-					# On envoie un message facebook
-					message = "BUG Application TV : \n\n"
-					message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
-					message += "\t- " + json_data["url"]
-					facebookNotification(message)
+			# On parcourt les requêtes du navigateur
+			for req in driver.requests:
+				# print("[+] URL : " + req.url)
+				if ("esi/TA".lower() in req.url.lower()) and ("format=json" in req.url.lower()):
+					print("[+] URL : " + req.url)
+					data = sw_decode(req.response.body, req.response.headers.get('Content-Encoding', 'identity'))
+					json_data = json.loads(data.decode("utf8"))
+
+					# Si on est en production
+					if current_app.config.get('env') == "production":
+						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/")
+					else:
+						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/")
+
+					url_find = True
+					# On vérifie qu'on a bien netflux.fun dans l'url
+					if "netflux.fun" not in data_output["url"]:
+						data_output["url"] = ""
+						error = "Bad Link"
+						# On envoie un message facebook
+						message = "BUG Application TV : \n\n"
+						message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
+						message += "\t- " + json_data["url"]
+						facebookNotification(message)
+			i += 1
+			time.sleep(1)
 
 		# On ferme le driver
 		driver.quit()
