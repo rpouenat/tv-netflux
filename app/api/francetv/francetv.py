@@ -88,7 +88,7 @@ def getUrlFranceTV(chaine_name):
 
 		time.sleep(8)
 
-		driver.save_screenshot('direct.png')
+		# driver.save_screenshot('direct.png')
 
 		# On parcourt les requêtes du navigateur
 		for req in driver.requests:
