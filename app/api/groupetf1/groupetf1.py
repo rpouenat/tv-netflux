@@ -130,6 +130,9 @@ def getUrlGroupeTF1(chaine_name):
 					message += "\t- " + req.url
 					facebookNotification(message)
 
+		# On ferme le driver
+		driver.quit()
+
 	else:
 		error = "Unknown TV"
 

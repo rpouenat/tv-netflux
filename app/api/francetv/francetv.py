@@ -94,6 +94,9 @@ def getUrlFranceTV(chaine_name):
 					message += "\t- " + json_data["url"]
 					facebookNotification(message)
 
+		# On ferme le driver
+		driver.quit()
+
 	else:
 		error = "Unknown TV"
 
