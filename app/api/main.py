@@ -6,6 +6,7 @@ from .functions.functions import json_return, facebookNotification
 from .groupetf1.groupetf1 import getUrlGroupeTF1
 from .francetv.francetv import getUrlFranceTV
 from .arte.arte import getArteURL
+from .eurosport.eurosport import getEurosportURL
 
 
 
@@ -29,6 +30,9 @@ def getTVURL(chaine_name):
 	# Arte
 	elif chaine_name == "arte":
 		error, data_output = getArteURL()
+
+	elif "eurosport" in chaine_name:
+		error, data_output = getEurosportURL(chaine_name)
 
 	# Tout tout autre chaine
 	else:
