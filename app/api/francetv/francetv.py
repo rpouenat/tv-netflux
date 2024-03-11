@@ -201,10 +201,25 @@ def getUrlFranceTV(chaine_name):
 					json_data = json.loads(data.decode("utf8"))
 
 					# Si on est en production
+					# if current_app.config.get('env') == "production":
+					# 	data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
+					# else:
+					# 	data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
+
 					if current_app.config.get('env') == "production":
-						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
+						if "live-ssai.ftven.fr" in url:
+							data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
+						elif "simulcast-p.ftven.fr" in url:
+							data_output["url"] = url
+							# data_output["url"] = json_data["url"].replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2083/tv/francetv/simulcast-p/")
 					else:
-						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
+						if "live-ssai.ftven.fr" in url:
+							data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
+						elif "simulcast-p.ftven.fr" in url:
+							# data_output["url"] = url
+							data_output["url"] = json_data["url"].replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2087/tv/francetv/simulcast-p/")
+
+
 
 					url_find = True
 					# On vérifie qu'on a bien netflux.fun dans l'url
@@ -226,4 +241,10 @@ def getUrlFranceTV(chaine_name):
 		error = "Unknown TV"
 
 	return error, data_output
+
+
+
+
+
+
 

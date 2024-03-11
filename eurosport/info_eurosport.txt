@@ -315,5 +315,54 @@ Accept-Language: fr-FR,fr;q=0.9
 
 Générer un token pourrait être une solution : 
 	
-curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmVlYWRlNTcxLTQzOGYtNDUwNC1hMDJmLWIwYzc2ZGY2YWNmZSIsImp0aSI6InRva2VuLTFiYWExNmEwLWFkZTctNDU0NS05Y2YxLWZhM2UzMjg4MmY5NiIsImFub255bW91cyI6ZmFsc2UsImlhdCI6MTcxMDA5NTM4M30.mN2px4Zu_4QjwnC_L0E_O1080U0Wt4N6dkGIs2XOt8U" -d '{ "sourceSystemId" : "eurosport-e15341917c0ch3",  "deviceInfo" : {    "adBlocker" : false  }}' -H "Content-Type: application/json" -X POST https://eu3-prod.disco-api.com/playback/v3/videoPlaybackInfo
+curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmVlYWRlNTcxLTQzOGYtNDUwNC1hMDJmLWIwYzc2ZGY2YWNmZSIsImp0aSI6InRva2VuLWZiNmRiYzc5LTUzMGEtNGM5OC05MzJiLTYyYjZmMGE0ZDFkZCIsImFub255bW91cyI6ZmFsc2UsImlhdCI6MTcxMDE2MzM1Mn0.t45-tK2OotOLWViUk7xYauFRd7G1rO3vaCfPq3iksM4" -d '{ "sourceSystemId" : "eurosport-e15341917c0ch3",  "deviceInfo" : {    "adBlocker" : false  }}' -H "Content-Type: application/json" -X POST https://eu3-prod.disco-api.com/playback/v3/videoPlaybackInfo
+
+
+
+
+
+
+
+POST /login HTTP/1.1
+Host: eu3-prod-direct.eurosport.fr
+x-disco-arkose-token: 96117bbaf515d1078.2171615305|r=eu-west-1|meta=3|metabgclr=%23ffffff|metaiconclr=%23757575|guitextcolor=%23000000|pk=FE296399-FDEA-2EA2-8CD5-50F6E3157ECA|at=40|sup=1|rid=42|ag=101|cdn_url=https%3A%2F%2Fclient-api.arkoselabs.com%2Fcdn%2Ffc|lurl=https%3A%2F%2Faudio-eu-west-1.arkoselabs.com|surl=https%3A%2F%2Fclient-api.arkoselabs.com|smurl=https%3A%2F%2Fclient-api.arkoselabs.com%2Fcdn%2Ffc%2Fassets%2Fstyle-manager
+x-disco-client: IOS:17.3.1:WEB_AUTH:3.4.0-gi1
+Accept: */*
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmZjOTUzMTgxLTA3YTYtNDczYy1hOTkxLWMzZDRjOGFjN2E5ZCIsImp0aSI6InRva2VuLTBkYjg2NTQ1LTE2NzItNDM4OS1iMTFjLTI4NWY2YTZkN2UxMiIsImFub255bW91cyI6dHJ1ZSwiaWF0IjoxNzEwMTUzMjEzfQ.mEER0SE4qLzRXiKY43IExE55OtTGDro_xTar6QJKZBI
+Sec-Fetch-Site: same-site
+x-disco-arkose-sitekey: FE296399-FDEA-2EA2-8CD5-50F6E3157ECA
+Accept-Language: fr-FR,fr;q=0.9
+Accept-Encoding: gzip, deflate
+Sec-Fetch-Mode: cors
+x-disco-params: realm=eurosport
+Origin: https://auth.eurosport.fr
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+Referer: https://auth.eurosport.fr/
+Content-Length: 578
+Connection: close
+Content-Type: application/json
+Sec-Fetch-Dest: empty
+Cookie: eurosport_user={%22favoritesUserToken%22:%22eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRmF2b3JpdGVJZCI6ImJhZGJjNzlhLTAzNGEtNDVmMC05MTM5LTVhOTM3N2JlNWVlYiIsImlhdCI6MTcxMDA5NDQ3N30.zegmUxbTXiNXqhTG0cS7QnaxV2BwadrUCHnWhKmqvPY%22%2C%22isRegistered%22:false%2C%22isSubscribed%22:true%2C%22profileId%22:%22PROFILEIDb421aada-ecbf-4ce8-afe2-14ad3df13b7d%22%2C%22subscriptionUserID%22:%22USERID:eurosport:fc953181-07a6-473c-a991-c3d4c8ac7a9d%22}; eurosport_user_country_code=fr; eurosport_user_email=683539c33d664fbb089cec6ca2efd9238a4e98fec194e324b289039236977c53
+
+{"credentials":{"username":"georgesdupont2128@protonmail.com","password":"7h5kyXD#7S%ztgB","arkoseSiteKey":"FE296399-FDEA-2EA2-8CD5-50F6E3157ECA","arkoseToken":"96117bbaf515d1078.2171615305|r=eu-west-1|meta=3|metabgclr=%23ffffff|metaiconclr=%23757575|guitextcolor=%23000000|pk=FE296399-FDEA-2EA2-8CD5-50F6E3157ECA|at=40|sup=1|rid=42|ag=101|cdn_url=https%3A%2F%2Fclient-api.arkoselabs.com%2Fcdn%2Ffc|lurl=https%3A%2F%2Faudio-eu-west-1.arkoselabs.com|surl=https%3A%2F%2Fclient-api.arkoselabs.com|smurl=https%3A%2F%2Fclient-api.arkoselabs.com%2Fcdn%2Ffc%2Fassets%2Fstyle-manager"}}
+
+
+
+
+
+
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmVlYWRlNTcxLTQzOGYtNDUwNC1hMDJmLWIwYzc2ZGY2YWNmZSIsImp0aSI6InRva2VuLWZiNmRiYzc5LTUzMGEtNGM5OC05MzJiLTYyYjZmMGE0ZDFkZCIsImFub255bW91cyI6ZmFsc2UsImlhdCI6MTcxMDE2MzM1Mn0.t45-tK2OotOLWViUk7xYauFRd7G1rO3vaCfPq3iksM4
+
+
+
+{
+  "sub": "USERID:eurosport:eeade571-438f-4504-a02f-b0c76df6acfe",
+  "jti": "token-fb6dbc79-530a-4c98-932b-62b6f0a4d1dd",
+  "anonymous": false,
+  "iat": 1710163352
+}
+
+
+
 
