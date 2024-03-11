@@ -205,19 +205,20 @@ def getUrlFranceTV(chaine_name):
 					# 	data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
 					# else:
 					# 	data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
+					url = json_data["url"]
 
 					if current_app.config.get('env') == "production":
 						if "live-ssai.ftven.fr" in url:
-							data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
-						elif "simulcast-p.ftven.fr" in url:
-							data_output["url"] = url
-							# data_output["url"] = json_data["url"].replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2083/tv/francetv/simulcast-p/")
-					else:
-						if "live-ssai.ftven.fr" in url:
-							data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
+							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
 						elif "simulcast-p.ftven.fr" in url:
 							# data_output["url"] = url
-							data_output["url"] = json_data["url"].replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2087/tv/francetv/simulcast-p/")
+							data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2083/tv/francetv/simulcast-p/")
+					else:
+						if "live-ssai.ftven.fr" in url:
+							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
+						elif "simulcast-p.ftven.fr" in url:
+							# data_output["url"] = url
+							data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2087/tv/francetv/simulcast-p/")
 
 
 
