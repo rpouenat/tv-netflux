@@ -202,9 +202,9 @@ def getUrlFranceTV(chaine_name):
 
 					# Si on est en production
 					if current_app.config.get('env') == "production":
-						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/")
+						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
 					else:
-						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/")
+						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
 
 					url_find = True
 					# On vérifie qu'on a bien netflux.fun dans l'url
