@@ -35,3 +35,10 @@ Fait planter le navigateur :
 
 # https://github.com/davidjamesherzog/videojs-shaka
 # "shakaConfig":{"drm":{"preferredKeySystems":["com.microsoft.playready.recommendation","com.widevine.alpha"]}}
+
+
+
+
+
+
+

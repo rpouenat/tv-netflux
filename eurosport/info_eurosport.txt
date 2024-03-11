@@ -1,0 +1,319 @@
+
+
+# Challenge : https://client-api.arkoselabs.com/fc/api/?onload=loadChallenge
+
+	Code : 
+
+		/* PLEASE DO NOT COPY AND PASTE THIS CODE. */
+	!function(){var t=document.createElement("script");t.setAttribute("ec-api-script", "true");t.type="text/javascript",t.async=!0,t.src="https://client-api.arkoselabs.com/cdn/fc/js/c6544c66c46b670694af9c762d53aaf89b8e87ce/standard/funcaptcha_api.js";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}();
+
+# Eurosport
+
+
+		https://eu3-prod-direct.eurosport.fr/playback/v3/videoPlaybackInfo
+
+
+			POST /playback/v3/videoPlaybackInfo HTTP/1.1
+			Host: eu3-prod-direct.eurosport.fr
+			User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:123.0) Gecko/20100101 Firefox/123.0
+			Accept: */*
+			Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3
+			Accept-Encoding: gzip, deflate
+			Referer: https://www.eurosport.fr/cyclisme/paris-nice/paris-nice-2024-8e-etape_brdeurosport-e15344522c0ch203/video.shtml
+			x-disco-client: WEB:UNKNOWN:escom:0.287.5
+			x-device-info: escom/0.287.5 (Apple/Macintosh; Mac OS/10.15; 944dabcb-0b9a-4aa2-96db-cb2da4f0bd72)
+			Content-Type: application/json
+			Content-Length: 154
+			Origin: https://www.eurosport.fr
+			DNT: 1
+			Sec-GPC: 1
+			Connection: close
+			Cookie: 
+				eurosport_country_code=FR; 
+				eurosport_is_eu=1;
+				OptanonConsent=isGpcEnabled=0&datestamp=Sun+Mar+10+2024+18%3A11%3A18+GMT%2B0100+(heure+normale+d%E2%80%99Europe+centrale)&version=202310.2.0&browserGpcFlag=1&isIABGlobal=false&hosts=&consentId=180de965-f824-4914-a510-44249b44e2b2&interactionCount=1&landingPath=NotLandingPage&groups=C0002%3A1%2CC0003%3A1%2CBG2233%3A1%2CC0004%3A1%2CBG2232%3A1&geolocation=%3B&AwaitingReconsent=false;
+				st=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmVlYWRlNTcxLTQzOGYtNDUwNC1hMDJmLWIwYzc2ZGY2YWNmZSIsImp0aSI6InRva2VuLWJkYzYwYjc5LTdkY2MtNGZmNi04MDk1LTY3MzliOWVhYjkzMSIsImFub255bW91cyI6ZmFsc2UsImlhdCI6MTcxMDA5MDYzMn0.jJI4xFhG-IxKpw2qebMj9-ZUTLCRSMeXW2wX2LjCYmI;
+				eurosport_user={%22isRegistered%22:true%2C%22isSubscribed%22:true%2C%22profileId%22:%22PROFILEIDddd55c41-2f60-440d-aaa4-768fa84aeb23%22%2C%22subscriptionUserID%22:%22USERID:eurosport:eeade571-438f-4504-a02f-b0c76df6acfe%22};
+				OptanonAlertBoxClosed=2024-03-10T17:10:06.138Z;
+				eupubconsent-v2=CP7QSNgP7QSNgAcABBENArEwAP_AAEAAACiQIsAB7CZMRSFAIGJkYIIwAIAVwBAAQkAABAQBAQAEABIAMIQEkCAAAACAACAAAAIAACIAIAAACAAAAAAAAAAAIAAAAAAAAAAAIAAAAAAAAgAACAAACQAAEAAAAAAEAAAAgAAAEBoAQEgAAAAAAAAAAAABAAABAAAAAAAAQAAAAAAIAAAAAAAAAAAAAAAED94D8ACgALAAqABwAEAAJAAZAA0ACIAEwAKoAWwAzAB-AEIAI4ATgAwABlADuAH6AQgAjoBfQD2gKaAWwAvMBiwDJAHBAP3AIHQFgAFgAVAA4ACCAGQAaABEACYAFUAMwAfgBOADAAGUAO4AfoBFgCOgKaAWwAvMBkgDLBwAoAB4AJAAoACOAIGAQgAnYDBAGLAP3IQBwAFgBMACqAI4AYAA7gFNEAAYADwC-gMEJQCwAFgAcACIAEwAKoAjgBgAKaAWwAvMBkhIAIAO4BiwDLAH7lICwACwAKgAcABBADIANAAiABMACqAGYAPwAwABlAD9AIsAR0A9oCmgFsALzAZIAywBwRQAOACQARwAnAB3AMEAYsA_cAAA.f_gACAAAAAAA;
+				AMCV_9AE0F0145936E3790A495CAA%40AdobeOrg=179643557%7CMCMID%7C05260692553845899780942055772029824189%7CMCOPTOUT-1710097882s%7CNONE%7CvVersion%7C5.5.0%7CMCIDTS%7C19793;
+				AMCVS_9AE0F0145936E3790A495CAA%40AdobeOrg=1;
+				gpv_pn=news%3Awatch%3Avideo%3Acycling;
+				s_ppv=news%253Awatch%253Avideo%253Acycling%2C37%2C37%2C690%2C1%2C2;
+				s_ips=690;
+				s_tp=1863;
+				s_plt=2.86;
+				s_pltp=news%3Awatch%3Avideo%3Acycling;
+				s_cc=true;
+				eurosport_user_country_code=fr;
+				eurosport_user_email=683539c33d664fbb089cec6ca2efd9238a4e98fec194e324b289039236977c53;
+				ecos.dt=1710090679867;
+				_gcl_au=1.1.954730200.1710090640;
+				_ga_Q1DRC3XX59=GS1.1.1710090640.1.1.1710090680.20.0.0;
+				_ga=GA1.1.426104665.1710090640;
+				sc_dslv_v31=1710090674734;
+				sc_dslv_v31_s=First%20Visit
+			Sec-Fetch-Dest: empty
+			Sec-Fetch-Mode: cors
+			Sec-Fetch-Site: same-site
+
+			{"sourceSystemId":"eurosport-e15344522c0ch203","deviceInfo":{"adBlocker":false,"screen":{"width":1280,"height":800},"player":{"width":1280,"height":690}}}
+
+
+
+# Renvoie
+
+			{
+			  "data" : {
+			    "attributes" : {
+			      "reportProgressInterval" : 60000,
+			      "streaming" : [ {
+			        "fallback" : false,
+			        "protection" : {
+			          "clearkeyEnabled" : true,
+			          "drmEnabled" : false,
+			          "schemes" : {
+			            "clearkey" : {
+			              "licenseUrl" : "https://discovery-eur.conax.cloud/fairplay/clearkey"
+			            }
+			          }
+			        },
+			        "type" : "dash",
+			        "url" : "https://dplus-eu-cloudfront.prod-live.h264.io/primary/1/67b5dfe3a5a9479b9b9cb18382471ef7/x-discovery-token=Expires=1710144683&KeyName=primary&Signature=rztLaXn7tHfiWWxjXlsnXWoQ5YM/start/1710087341/index.mpd?aws.manifestfilter=audio_codec:AACL;video_codec:h264;video_dynamic_range:sdr;video_height:1-1080&hdnts=exp=1710144683~acl=/primary/1/67b5dfe3a5a9479b9b9cb18382471ef7/start/1710087341/index.mpd%3Faws.manifestfilter%3Daudio_codec%3AAACL%3Bvideo_codec%3Ah264%3Bvideo_dynamic_range%3Asdr%3Bvideo_height%3A1-1080*~hmac=37c7c699139d97f3ddef7817c26e28b874e3fa4aef25dd9249e377f8bd72a5bd"
+			      }, {
+			        "fallback" : false,
+			        "protection" : {
+			          "clearkeyEnabled" : true,
+			          "drmEnabled" : false,
+			          "schemes" : {
+			            "clearkey" : {
+			              "licenseUrl" : "https://discovery-eur.conax.cloud/fairplay/clearkey"
+			            }
+			          }
+			        },
+			        "type" : "hls",
+			        "url" : "https://eurosport-live-prod.akamai.prod-live.h264.io/primary/1/a454dd6146454bb6b27badadab92dc9d/hdntl=exp=1710144683~acl=/primary/1/a454dd6146454bb6b27badadab92dc9d/*~data=hdntl~hmac=cdd4b39142e52c020c90cd61019f75d0d0c5a76a625c0722b5eb378b0cc5bee1/start/1710087341/index.m3u8?aws.manifestfilter=audio_codec:AACL;video_codec:h264;video_dynamic_range:sdr;video_height:1-1080&hdnts=exp=1710144683~acl=/primary/1/a454dd6146454bb6b27badadab92dc9d/start/1710087341/index.m3u8%3Faws.manifestfilter%3Daudio_codec%3AAACL%3Bvideo_codec%3Ah264%3Bvideo_dynamic_range%3Asdr%3Bvideo_height%3A1-1080*~hmac=48b396df7c47408c7de81586700a7cd78b7ec3a238b4b220b1833c139d069d82"
+			      }, {
+			        "fallback" : false,
+			        "protection" : {
+			          "clearkeyEnabled" : true,
+			          "drmEnabled" : false,
+			          "schemes" : {
+			            "clearkey" : {
+			              "licenseUrl" : "https://discovery-eur.conax.cloud/fairplay/clearkey"
+			            }
+			          }
+			        },
+			        "type" : "mss",
+			        "url" : "https://eurosport-live-prod.akamai.prod-live.h264.io/primary/1/b4974888bb5a403bab49af2305085be9/hdntl=exp=1710144683~acl=/primary/1/b4974888bb5a403bab49af2305085be9/*~data=hdntl~hmac=5937d9dad0189d93a8aea9da0e50413b9d9823a1066905708f5400cae960045b/start/1710087341/index.ism/Manifest?aws.manifestfilter=audio_codec:AACL;video_bitrate:900000-5500000;video_codec:h264;video_dynamic_range:sdr;video_height:1-1080&hdnts=exp=1710144683~acl=/primary/1/b4974888bb5a403bab49af2305085be9/start/1710087341/index.ism/Manifest%3Faws.manifestfilter%3Daudio_codec%3AAACL%3Bvideo_bitrate%3A900000-5500000%3Bvideo_codec%3Ah264%3Bvideo_dynamic_range%3Asdr%3Bvideo_height%3A1-1080*~hmac=ae04fe105c0eeadc8eaa1d33b9668768160d35c3385719604493ecc2e6d2de44"
+			      } ],
+			      "userInfo" : {
+			        "packages" : [ "Eurosport", "Free", "Registered" ],
+			        "products" : [ "eurosport-player-all-sports" ]
+			      },
+			      "viewingHistory" : {
+			        "viewed" : false
+			      }
+			    },
+			    "id" : "3588885",
+			    "type" : "videoPlaybackInfo"
+			  },
+			  "meta" : {
+			    "site" : {
+			      "attributes" : {
+			        "brand" : "eurosport",
+			        "websiteHostName" : "fr.eurosportplayer.com"
+			      },
+			      "id" : "FR",
+			      "type" : "site"
+			    }
+			  }
+			}
+
+
+#
+
+
+
+
+				POST /playback/v3/videoPlaybackInfo HTTP/1.1
+				Host: eu3-prod-direct.eurosport.fr
+				User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:123.0) Gecko/20100101 Firefox/123.0
+				Accept: */*
+				Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3
+				Accept-Encoding: gzip, deflate
+				Referer: https://www.eurosport.fr/saut-a-ski/oslo/oslo-2-hs-134-f_brdeurosport-e15296769c0ch3/video.shtml
+				x-disco-client: WEB:UNKNOWN:escom:0.287.5
+				x-device-info: escom/0.287.5 (Apple/Macintosh; Mac OS/10.15; 667b9bfc-6a68-47dc-b6db-9c0eb3283e65)
+				Content-Type: application/json
+				Content-Length: 152
+				Origin: https://www.eurosport.fr
+				DNT: 1
+				Sec-GPC: 1
+				Connection: close
+				Cookie: eurosport_country_code=NL; eurosport_is_eu=1; OptanonConsent=isGpcEnabled=0&datestamp=Sun+Mar+10+2024+18%3A17%3A48+GMT%2B0100+(heure+normale+d%E2%80%99Europe+centrale)&version=202310.2.0&browserGpcFlag=1&isIABGlobal=false&hosts=&consentId=180de965-f824-4914-a510-44249b44e2b2&interactionCount=1&landingPath=NotLandingPage&groups=C0002%3A1%2CC0003%3A1%2CBG2233%3A1%2CC0004%3A1%2CBG2232%3A1&geolocation=%3B&AwaitingReconsent=false; st=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmVlYWRlNTcxLTQzOGYtNDUwNC1hMDJmLWIwYzc2ZGY2YWNmZSIsImp0aSI6InRva2VuLWJkYzYwYjc5LTdkY2MtNGZmNi04MDk1LTY3MzliOWVhYjkzMSIsImFub255bW91cyI6ZmFsc2UsImlhdCI6MTcxMDA5MDYzMn0.jJI4xFhG-IxKpw2qebMj9-ZUTLCRSMeXW2wX2LjCYmI; eurosport_user={%22isRegistered%22:true%2C%22isSubscribed%22:true%2C%22profileId%22:%22PROFILEIDddd55c41-2f60-440d-aaa4-768fa84aeb23%22%2C%22subscriptionUserID%22:%22USERID:eurosport:eeade571-438f-4504-a02f-b0c76df6acfe%22}; OptanonAlertBoxClosed=2024-03-10T17:10:06.138Z; eupubconsent-v2=CP7QSNgP7QSNgAcABBENArEwAP_AAEAAACiQIsAB7CZMRSFAIGJkYIIwAIAVwBAAQkAABAQBAQAEABIAMIQEkCAAAACAACAAAAIAACIAIAAACAAAAAAAAAAAIAAAAAAAAAAAIAAAAAAAAgAACAAACQAAEAAAAAAEAAAAgAAAEBoAQEgAAAAAAAAAAAABAAABAAAAAAAAQAAAAAAIAAAAAAAAAAAAAAAED94D8ACgALAAqABwAEAAJAAZAA0ACIAEwAKoAWwAzAB-AEIAI4ATgAwABlADuAH6AQgAjoBfQD2gKaAWwAvMBiwDJAHBAP3AIHQFgAFgAVAA4ACCAGQAaABEACYAFUAMwAfgBOADAAGUAO4AfoBFgCOgKaAWwAvMBkgDLBwAoAB4AJAAoACOAIGAQgAnYDBAGLAP3IQBwAFgBMACqAI4AYAA7gFNEAAYADwC-gMEJQCwAFgAcACIAEwAKoAjgBgAKaAWwAvMBkhIAIAO4BiwDLAH7lICwACwAKgAcABBADIANAAiABMACqAGYAPwAwABlAD9AIsAR0A9oCmgFsALzAZIAywBwRQAOACQARwAnAB3AMEAYsA_cAAA.f_gACAAAAAAA; AMCV_9AE0F0145936E3790A495CAA%40AdobeOrg=179643557%7CMCMID%7C05260692553845899780942055772029824189%7CMCOPTOUT-1710098714s%7CNONE%7CvVersion%7C5.5.0%7CMCIDTS%7C19793; AMCVS_9AE0F0145936E3790A495CAA%40AdobeOrg=1; gpv_pn=news%3Awatch%3Avideo%3Aski-jumping; s_ppv=news%253Awatch%253Avideo%253Aski-jumping%2C37%2C37%2C690%2C1%2C2; s_ips=690; s_tp=1863; s_plt=%5B%5BB%5D%5D; s_pltp=%5B%5BB%5D%5D; s_cc=true; eurosport_user_country_code=fr; eurosport_user_email=683539c33d664fbb089cec6ca2efd9238a4e98fec194e324b289039236977c53; ecos.dt=1710091508393; _gcl_au=1.1.954730200.1710090640; _ga_Q1DRC3XX59=GS1.1.1710090640.1.1.1710091508.60.0.0; _ga=GA1.1.426104665.1710090640; sc_dslv_v31=1710090674734; sc_dslv_v31_s=First%20Visit
+				Sec-Fetch-Dest: empty
+				Sec-Fetch-Mode: cors
+				Sec-Fetch-Site: same-site
+
+				{"sourceSystemId":"eurosport-e15296769c0ch3","deviceInfo":{"adBlocker":false,"screen":{"width":1280,"height":800},"player":{"width":1280,"height":690}}}
+
+
+
+
+
+
+# Renvoie 
+
+
+			HTTP/1.1 200 OK
+			Date: Sun, 10 Mar 2024 17:25:15 GMT
+			Content-Type: application/json;charset=utf-8
+			Connection: close
+			access-control-allow-credentials: true
+			access-control-allow-origin: https://www.eurosport.fr
+			x-disco-id: le2XQpQrrz
+			etag: W/"3232416112"
+			cache-control: max-age=0, must-revalidate
+			vary: Accept-Encoding,Origin
+			strict-transport-security: max-age=15724800; includeSubDomains;
+			Content-Length: 3512
+
+			{
+			  "data" : {
+			    "attributes" : {
+			      "reportProgressInterval" : 60000,
+			      "streaming" : [ {
+			        "fallback" : false,
+			        "protection" : {
+			          "clearkeyEnabled" : true,
+			          "drmEnabled" : false,
+			          "schemes" : {
+			            "clearkey" : {
+			              "licenseUrl" : "https://discovery-eur.conax.cloud/fairplay/clearkey"
+			            }
+			          }
+			        },
+			        "type" : "dash",
+			        "url" : "https://dplus-eu-cloudfront.prod-live.h264.io/primary/2/13780249e468403d9d71ad40fc16996d/x-discovery-token=Expires=1710145515&KeyName=primary&Signature=7Gy9rjtaxmUEvwVdp5xpMKWGHA4/start/1710088605/index.mpd?aws.manifestfilter=audio_codec:AACL;video_codec:h264;video_dynamic_range:sdr;video_height:1-1080&hdnts=exp=1710145515~acl=/primary/2/13780249e468403d9d71ad40fc16996d/start/1710088605/index.mpd%3Faws.manifestfilter%3Daudio_codec%3AAACL%3Bvideo_codec%3Ah264%3Bvideo_dynamic_range%3Asdr%3Bvideo_height%3A1-1080*~hmac=66f459b0d9cc3b21da00f9024d39cc2bb55fee49cc05f51e4c8945cc3a134738"
+			      }, {
+			        "fallback" : false,
+			        "protection" : {
+			          "clearkeyEnabled" : true,
+			          "drmEnabled" : false,
+			          "schemes" : {
+			            "clearkey" : {
+			              "licenseUrl" : "https://discovery-eur.conax.cloud/fairplay/clearkey"
+			            }
+			          }
+			        },
+			        "type" : "hls",
+			        "url" : "https://dplus-eu-cloudfront.prod-live.h264.io/primary/2/ca74ac8b80494c43a4f68b18aaa15dbb/x-discovery-token=Expires=1710145515&KeyName=primary&Signature=qmgAQDwWPDMdiXOTZ_T1HLf6BHg/start/1710088605/index.m3u8?aws.manifestfilter=audio_codec:AACL;video_codec:h264;video_dynamic_range:sdr;video_height:1-1080&hdnts=exp=1710145515~acl=/primary/2/ca74ac8b80494c43a4f68b18aaa15dbb/start/1710088605/index.m3u8%3Faws.manifestfilter%3Daudio_codec%3AAACL%3Bvideo_codec%3Ah264%3Bvideo_dynamic_range%3Asdr%3Bvideo_height%3A1-1080*~hmac=98d717294cf46525e3132d2c7307ad2279014462ea166b91222d7212f7e45edd"
+			      }, {
+			        "fallback" : false,
+			        "protection" : {
+			          "clearkeyEnabled" : true,
+			          "drmEnabled" : false,
+			          "schemes" : {
+			            "clearkey" : {
+			              "licenseUrl" : "https://discovery-eur.conax.cloud/fairplay/clearkey"
+			            }
+			          }
+			        },
+			        "type" : "mss",
+			        "url" : "https://eurosport-live-prod.akamai.prod-live.h264.io/primary/2/d1937071da394bd6b60bfe421c5d0651/hdntl=exp=1710145515~acl=/primary/2/d1937071da394bd6b60bfe421c5d0651/*~data=hdntl~hmac=22269fbd21a824335952203e0d3c5fdc442565c807c17d7614073a1cad7ee8f0/start/1710088605/index.ism/Manifest?aws.manifestfilter=audio_codec:AACL;video_bitrate:900000-5500000;video_codec:h264;video_dynamic_range:sdr;video_height:1-1080&hdnts=exp=1710145515~acl=/primary/2/d1937071da394bd6b60bfe421c5d0651/start/1710088605/index.ism/Manifest%3Faws.manifestfilter%3Daudio_codec%3AAACL%3Bvideo_bitrate%3A900000-5500000%3Bvideo_codec%3Ah264%3Bvideo_dynamic_range%3Asdr%3Bvideo_height%3A1-1080*~hmac=7ec53c4db1bdc271076f9a6215bee931a647b59fb45dd0dedab671ccaf65ed5e"
+			      } ],
+			      "userInfo" : {
+			        "packages" : [ "Eurosport", "Free", "Registered" ],
+			        "products" : [ "eurosport-player-all-sports" ]
+			      },
+			      "viewingHistory" : {
+			        "viewed" : false
+			      }
+			    },
+			    "id" : "3588890",
+			    "type" : "videoPlaybackInfo"
+			  },
+			  "meta" : {
+			    "site" : {
+			      "attributes" : {
+			        "brand" : "eurosport",
+			        "websiteHostName" : "fr.eurosportplayer.com"
+			      },
+			      "id" : "FR",
+			      "type" : "site"
+			    }
+			  }
+			}
+
+
+
+
+
+
+
+# https://eurosport-live-prod.akamai.prod-live.h264.io/primary/1/a454dd6146454bb6b27badadab92dc9d/hdntl=exp=1710144683~acl=/primary/1/a454dd6146454bb6b27badadab92dc9d/*~data=hdntl~hmac=cdd4b39142e52c020c90cd61019f75d0d0c5a76a625c0722b5eb378b0cc5bee1/start/1710087341/index.m3u8?aws.manifestfilter=audio_codec:AACL;video_codec:h264;video_dynamic_range:sdr;video_height:1-1080&hdnts=exp=1710144683~acl=/primary/1/a454dd6146454bb6b27badadab92dc9d/start/1710087341/index.m3u8%3Faws.manifestfilter%3Daudio_codec%3AAACL%3Bvideo_codec%3Ah264%3Bvideo_dynamic_range%3Asdr%3Bvideo_height%3A1-1080*~hmac=48b396df7c47408c7de81586700a7cd78b7ec3a238b4b220b1833c139d069d82
+
+# https://keys.vdp.h264.io/50313d19-7990-40b4-8e59-f39f7f977a33
+
+
+
+# https://dplus-eu-cloudfront.prod-live.h264.io/primary/2/ca74ac8b80494c43a4f68b18aaa15dbb/x-discovery-token=Expires=1710145515&KeyName=primary&Signature=qmgAQDwWPDMdiXOTZ_T1HLf6BHg/start/1710088605/index.m3u8?aws.manifestfilter=audio_codec:AACL;video_codec:h264;video_dynamic_range:sdr;video_height:1-1080&hdnts=exp=1710145515~acl=/primary/2/ca74ac8b80494c43a4f68b18aaa15dbb/start/1710088605/index.m3u8%3Faws.manifestfilter%3Daudio_codec%3AAACL%3Bvideo_codec%3Ah264%3Bvideo_dynamic_range%3Asdr%3Bvideo_height%3A1-1080*~hmac=98d717294cf46525e3132d2c7307ad2279014462ea166b91222d7212f7e45edd
+
+
+
+# Eurosport
+# Eurosport 1
+# Eurosport 2
+
+
+# Sauvegarder les cookies, notament pour ne pas à avoir à cliquer sur le j'accepte
+
+
+
+
+https://netsport.eurosport.io/?variables=%7B%22videoId%22%3A%22eurosport-e15351587c0ch203%22%2C%22videoType%22%3A%22PROGRAM%22%2C%22first%22%3A4%2C%22after%22%3Anull%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%224beef97c0399ef576f7c4e7e8b6b8960b866f78fd773ecb6daf27130f566f067%22%7D%7D
+
+
+curl -H "domain: www.eurosport.fr" https://netsport.eurosport.io/\?variables\=%7B%22videoId%22%3A%22eurosport-e15351587c0ch203%22%2C%22videoType%22%3A%22PROGRAM%22%2C%22first%22%3A4%2C%22after%22%3Anull%7D\&extensions\=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%224beef97c0399ef576f7c4e7e8b6b8960b866f78fd773ecb6daf27130f566f067%22%7D%7D
+
+
+{"data":{"editorialWatchVideoFeed":{"edges":[{"node":{"id":"Q2FyZFBvc2l0aW9uOmViZmNkZDRiLTU3YzEtNGI0MS05MDIyLWIxZDJkODE1MWMwOA==","cards":[{"__typename":"OnNowRailCard","__isCard":"OnNowRailCard","id":"T25Ob3dSYWlsQ2FyZDplYmZjZGQ0Yi01N2MxLTRiNDEtOTAyMi1iMWQyZDgxNTFjMDg6dW5kZWZpbmVk","contents":[{"__typename":"Program","__isCardContent":"Program","id":"eurosport-e15351587c0ch203","status":"ONAIR","startTime":"2024-03-10T17:28:46.320Z","endTime":"2024-03-10T18:25:40.920Z","title":"Tirreno-Adriatico 2024 | 7e étape","subtitle":"San Benedetto del Tronto – San Benedetto del Tronto (154km)","programLink":{"url":"https://www.eurosport.fr/cyclisme/tirreno-adriatico/tirreno-adriatico-2024-7e-etape_brdeurosport-e15351587c0ch203/video.shtml"},"pictureFormats":[{"url":"https://i.eurosport.com/taiga/Specifique/Crop/16_9/203_3_15309310_20240310-153620.jpeg","width":1920,"height":1080,"assetPictureFormat":"XXL_16_9"},{"url":"https://i.eurosport.com/taiga/Specifique/Crop/4_3/203_3_15309310_20240310-153621.jpeg","width":1440,"height":1080,"assetPictureFormat":"L_4_3"},{"url":"https://i.eurosport.com/taiga/Specifique/Crop/3_4/203_3_15309310_20240310-153622.jpeg","width":1080,"height":810,"assetPictureFormat":"L_3_4"}],"allowedCountries":["AD","BE","FR","FX","GF","PF","TF","GP","GY","LU","MQ","YT","MC","NC","RE","MF","PM","CH","WF"],"entitlement":"PREMIUM","isLive":false,"isUHD":false,"programDuration":3414,"sportId":18,"sportName":"Cyclisme","channel":{"id":"Y2hhbm5lbDpldXJvc3BvcnQtMjAz","channelNetsportId":"eurosport-203","name":"EUROSPORT 2","family":"EUROSPORT2","link":{"url":"https://www.eurosport.fr/eurosport-2-france_ifceurosport-203/video.shtml"}}}]}],"pageInfo":null,"properties":{"allowFilterByCountry":false,"allowFilterByOlySport":false,"blockType":"watch_rail","categoryPremium":null,"competitionPremium":null,"contentType":"PremiumOnAir","channels":"All","count":10,"eventPremium":null,"legPremium":null,"sortBy":"Latest","sortByLimitOfDays":null,"sportPremium":"18","viewAllLabel":"","viewAllLink":"","withPagination":false,"pinnedContents":[],"isInfinityModule":true,"title":"En ce moment","moduleId":"ebfcdd4b-57c1-4b41-9022-b1d2d8151c08"},"title":"En ce moment","viewAllId":"918a3347-87f8-488c-a184-ce9bfdffd4be"}}],"pageInfo":{"endCursor":"eyJjdXJzb3IiOiJNUT09IiwicGxhbm5lckN1cnNvcnMiOm51bGx9","hasNextPage":false,"hasPreviousPage":false,"startCursor":null},"seoBlock":null}}}
+
+
+
+
+
+
+
+# faire un curl sur la page des direct
+	$ https://www.eurosport.fr/watch/schedule.shtml
+
+
+
+POST /playback/v3/videoPlaybackInfo HTTP/1.1
+Host: eu3-prod.disco-api.com
+Content-Type: application/json
+X-NewRelic-ID: VQ8AWFdQDRABV1RQBgUHUFU=
+Accept-Encoding: gzip, deflate
+User-Agent: EurosportNews/2402211605 CFNetwork/1492.0.1 Darwin/23.3.0
+Connection: close
+Accept: */*
+x-disco-client: IOS:17.3.1:escom:8.3.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmVlYWRlNTcxLTQzOGYtNDUwNC1hMDJmLWIwYzc2ZGY2YWNmZSIsImp0aSI6InRva2VuLTFiYWExNmEwLWFkZTctNDU0NS05Y2YxLWZhM2UzMjg4MmY5NiIsImFub255bW91cyI6ZmFsc2UsImlhdCI6MTcxMDA5NTM4M30.mN2px4Zu_4QjwnC_L0E_O1080U0Wt4N6dkGIs2XOt8U
+Content-Length: 99
+Accept-Language: fr-FR,fr;q=0.9
+
+{
+  "sourceSystemId" : "eurosport-e15286357c0ch3",
+  "deviceInfo" : {
+    "adBlocker" : false
+  }
+}
+
+
+
+Générer un token pourrait être une solution : 
+	
+curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmVlYWRlNTcxLTQzOGYtNDUwNC1hMDJmLWIwYzc2ZGY2YWNmZSIsImp0aSI6InRva2VuLTFiYWExNmEwLWFkZTctNDU0NS05Y2YxLWZhM2UzMjg4MmY5NiIsImFub255bW91cyI6ZmFsc2UsImlhdCI6MTcxMDA5NTM4M30.mN2px4Zu_4QjwnC_L0E_O1080U0Wt4N6dkGIs2XOt8U" -d '{ "sourceSystemId" : "eurosport-e15341917c0ch3",  "deviceInfo" : {    "adBlocker" : false  }}' -H "Content-Type: application/json" -X POST https://eu3-prod.disco-api.com/playback/v3/videoPlaybackInfo
+
