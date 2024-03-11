@@ -60,13 +60,12 @@ def getUrlFranceTV(chaine_name):
 				req = requests.get("https://hdfauth.ftven.fr/esi/TA?format=json&url=" + video_url, headers=headers)
 				# print(video_url)
 				if req.status_code == 200:
-					data_output["url"] = req.json()["url"]
 
 					# Si on est en production
 					if current_app.config.get('env') == "production":
-						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/").replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2083/tv/francetv/simulcast-p/")
+						data_output["url"] = req.json()["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/").replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2083/tv/francetv/simulcast-p/")
 					else:
-						data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/").replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2087/tv/francetv/simulcast-p/")
+						data_output["url"] = req.json()["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/").replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2087/tv/francetv/simulcast-p/")
 
 					# On vérifie qu'on a bien netflux.fun dans l'url
 					if "netflux.fun" not in data_output["url"]:
