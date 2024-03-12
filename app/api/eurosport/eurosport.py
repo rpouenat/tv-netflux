@@ -143,18 +143,18 @@ def getEurosportURL(chaine_name):
 											# On arrête la boucle
 											break
 
-		if "eurosport-" not in data_output["url"]:
-			# On reset l'url
-			data_output["url"] = ""
-			# On ajoute une tentative
-			i += 1
-			time.sleep(1)
+			if ("eurosport-" not in data_output["url"]) and not error:
+				# On reset l'url
+				data_output["url"] = ""
+				# On ajoute une tentative
+				i += 1
+				time.sleep(1)
 		
-		# https://netflux.fun:2087/tv/eurosport/eurosport-live-prod/index_3.m3u8
+				# https://netflux.fun:2087/tv/eurosport/eurosport-live-prod/index_3.m3u8
 
 
 
-	else:
-		error = "Error status."
+		else:
+			error = "Error status."
 
 	return error, data_output
