@@ -120,18 +120,18 @@ def getUrlGroupeTF1(chaine_name):
 					# On remplace l'url
 					# Si on est en production
 					if current_app.config.get('env') == "production":
-						data_output["url"] = req.url.replace("https://live-"+chaine_name+"-das.cdn-0.diff.tf1.fr/", "https://netflux.fun:2083/tv/" + chaine_name + "/")
+						data_output["url"] = req.url.replace("https://live-"+chaine_name+"-das.cdn-0.diff.tf1.fr/", "https://tv.netflux.fun:2083/tv/" + chaine_name + "/")
 					else:
-						data_output["url"] = req.url.replace("https://live-"+chaine_name+"-das.cdn-0.diff.tf1.fr/", "https://netflux.fun:2087/tv/" + chaine_name + "/")
+						data_output["url"] = req.url.replace("https://live-"+chaine_name+"-das.cdn-0.diff.tf1.fr/", "https://tv.netflux.fun:2087/tv/" + chaine_name + "/")
 
 					url_find = True
-					# On vérifie qu'on a bien netflux.fun dans l'url
-					if "netflux.fun" not in data_output["url"]:
+					# On vérifie qu'on a bien tv.netflux.fun dans l'url
+					if "tv.netflux.fun" not in data_output["url"]:
 						data_output["url"] = ""
 						error = "Bad Link"
 						# On envoie un message facebook
 						message = "BUG Application TV : \n\n"
-						message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
+						message += "Impossibilité de mettre tv.netflux.fun dans le lien : \n\n"
 						message += "\t- " + req.url
 						facebookNotification(message)
 			i += 1

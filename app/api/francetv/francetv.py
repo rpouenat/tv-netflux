@@ -78,24 +78,24 @@ import time
 # 					# Si on est en production
 # 					if current_app.config.get('env') == "production":
 # 						if "live-ssai.ftven.fr" in url:
-# 							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
+# 							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://tv.netflux.fun:2083/tv/francetv/live-ssai/")
 # 						elif "simulcast-p.ftven.fr" in url:
 # 							data_output["url"] = url
-# 							# data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2083/tv/francetv/simulcast-p/")
+# 							# data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://tv.netflux.fun:2083/tv/francetv/simulcast-p/")
 # 					else:
 # 						if "live-ssai.ftven.fr" in url:
-# 							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
+# 							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://tv.netflux.fun:2087/tv/francetv/live-ssai/")
 # 						elif "simulcast-p.ftven.fr" in url:
 # 							data_output["url"] = url
-# 							# data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2087/tv/francetv/simulcast-p/")
+# 							# data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://tv.netflux.fun:2087/tv/francetv/simulcast-p/")
 
-# 					# # On vérifie qu'on a bien netflux.fun dans l'url
-# 					# if "netflux.fun" not in data_output["url"]:
+# 					# # On vérifie qu'on a bien tv.netflux.fun dans l'url
+# 					# if "tv.netflux.fun" not in data_output["url"]:
 # 					# 	data_output["url"] = ""
 # 					# 	error = "Bad Link"
 # 					# 	# On envoie un message facebook
 # 					# 	message = "BUG Application TV : \n\n"
-# 					# 	message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
+# 					# 	message += "Impossibilité de mettre tv.netflux.fun dans le lien : \n\n"
 # 					# 	message += "\t- " + json_data["url"]
 # 					# 	facebookNotification(message)
 # 	else:
@@ -202,34 +202,34 @@ def getUrlFranceTV(chaine_name):
 
 					# Si on est en production
 					# if current_app.config.get('env') == "production":
-					# 	data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
+					# 	data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://tv.netflux.fun:2083/tv/francetv/live-ssai/")
 					# else:
-					# 	data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
+					# 	data_output["url"] = json_data["url"].replace("https://live-ssai.ftven.fr/", "https://tv.netflux.fun:2087/tv/francetv/live-ssai/")
 					url = json_data["url"]
 
 					if current_app.config.get('env') == "production":
 						if "live-ssai.ftven.fr" in url:
-							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2083/tv/francetv/live-ssai/")
+							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://tv.netflux.fun:2083/tv/francetv/live-ssai/")
 						elif "simulcast-p.ftven.fr" in url:
 							data_output["url"] = url
-							# data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2083/tv/francetv/simulcast-p/")
+							# data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://tv.netflux.fun:2083/tv/francetv/simulcast-p/")
 					else:
 						if "live-ssai.ftven.fr" in url:
-							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://netflux.fun:2087/tv/francetv/live-ssai/")
+							data_output["url"] = url.replace("https://live-ssai.ftven.fr/", "https://tv.netflux.fun:2087/tv/francetv/live-ssai/")
 						elif "simulcast-p.ftven.fr" in url:
 							data_output["url"] = url
-							# data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://netflux.fun:2087/tv/francetv/simulcast-p/")
+							# data_output["url"] = url.replace("https://simulcast-p.ftven.fr/", "https://tv.netflux.fun:2087/tv/francetv/simulcast-p/")
 
 
 
 					url_find = True
-					# On vérifie qu'on a bien netflux.fun dans l'url
-					if ("netflux.fun" not in data_output["url"]) and ("simulcast-p.ftven.fr" not in data_output["url"]):
+					# On vérifie qu'on a bien tv.netflux.fun dans l'url
+					if ("tv.netflux.fun" not in data_output["url"]) and ("simulcast-p.ftven.fr" not in data_output["url"]):
 						data_output["url"] = ""
 						error = "Bad Link"
 						# On envoie un message facebook
 						message = "BUG Application TV : \n\n"
-						message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
+						message += "Impossibilité de mettre tv.netflux.fun dans le lien : \n\n"
 						message += "\t- " + json_data["url"]
 						facebookNotification(message)
 			i += 1
