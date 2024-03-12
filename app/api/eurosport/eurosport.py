@@ -90,7 +90,8 @@ def getEurosportURL(chaine_name):
 	i = 0
 
 	# tant que notre url ne contient pas eurosport-
-	while ("eurosport-" not in data_output["url"]) and (i < max_try):
+	while ("eurosport-" not in data_output["url"]) and (i < max_try) and not error:
+		print("[+] Try : " + str(i))
 
 		r = requests.post("https://eu3-prod.disco-api.com/playback/v3/videoPlaybackInfo", json=data_json, headers=headers)
 		if r.status_code == 200:
@@ -143,6 +144,7 @@ def getEurosportURL(chaine_name):
 											# On arrête la boucle
 											break
 
+			print(error)
 			if ("eurosport-" not in data_output["url"]) and not error:
 				# On reset l'url
 				data_output["url"] = ""
@@ -155,6 +157,8 @@ def getEurosportURL(chaine_name):
 
 
 		else:
+			print(r.status_code)
+			print(r.text)
 			error = "Error status."
 
 	return error, data_output
