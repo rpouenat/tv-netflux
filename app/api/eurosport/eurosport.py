@@ -43,9 +43,10 @@ def getLiveTV():
 			id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
 
 			data_output.append({
-				"type_tv" : "eurosport",
-				"name" : title,
-				"url" : id_channel
+				"type_tv" : "eurosport", # On set le type de chaine (tnt, canal, etc ...)
+				"name" : title, # On positionne le nom de la chaine
+				"url" : id_channel, # On set son id
+				"status" : 1 # On set la chaine active
 			})
 
 
