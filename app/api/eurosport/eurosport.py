@@ -82,13 +82,14 @@ def getEurosportURL(chaine_name):
 											# On envoie un message facebook
 											message = "BUG Application TV : \n\n"
 											message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
-											message += "\t- " + json_data["url"]
+											message += "\t- " + stream["url"]
 											facebookNotification(message)
 
 										# On arrête la boucle
 										break
 
 		
+		# https://netflux.fun:2087/tv/eurosport/eurosport-live-prod/index_3.m3u8
 
 
 
