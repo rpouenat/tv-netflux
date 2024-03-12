@@ -12,6 +12,49 @@ from flask import render_template, request, jsonify
 from ..functions.functions import json_return, facebookNotification
 import requests
 from flask import current_app
+from .. import api
+from bs4 import BeautifulSoup
+import time
+
+
+
+# Permet de récupérer les chaînes en live d'eurosport
+@api.route('/eurosport/livechannel', methods=['GET'])
+def getLiveTV():
+
+	error = ""
+	data_output = []
+
+	headers = {
+		"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+	}
+
+	# On fait une requête vers eurosport
+	req = requests.get("https://www.eurosport.fr/watch/", headers=headers)
+
+	if req.status_code == 200:
+		soup = BeautifulSoup(req.text, 'html.parser')
+		# On récupère les résultats 
+		table_result = soup.findAll('a', {"class": "HybridCard card-hover card-hover relative mx-auto flex"})
+		for link in table_result:
+			# On récupère le nom de la chaine
+			title = link.find('h3', {"class": "card-hover-underline"}).getText()
+			# On récupère l'ID de la chaine
+			id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
+
+			data_output.append({
+				"name" : title,
+				"url" : id_channel
+			})
+
+
+	# Si on a pas d'erreur 
+	if not error:
+		d = json_return("",200,data_output)
+	else:
+		d = json_return(error,400,"")
+
+	return jsonify(d),200
 
 
 # Permet de récupérer tous les commentaires pour un media
@@ -41,57 +84,69 @@ def getEurosportURL(chaine_name):
 		}
 	}
 
-	r = requests.post("https://eu3-prod.disco-api.com/playback/v3/videoPlaybackInfo", json=data_json, headers=headers)
-	if r.status_code == 200:
-		data_return = r.json()
-		if "data" in data_return:
-			if data_return["data"]:
-				if "attributes" in data_return["data"]:
-					if data_return["data"]["attributes"]:
-						if "streaming" in data_return["data"]["attributes"]:
-							if data_return["data"]["attributes"]["streaming"]:
-								streams = data_return["data"]["attributes"]["streaming"]
+	max_try = 10
+	i = 0
 
-								# On parcourt les streams jusqu'à trouver la bonne URL
-								for stream in streams:
-									if stream["type"] == "hls":
-										# On récupère l'URL
-										
-										# https://dplus-eu-cloudfront.prod-live.h264.io/
-										# https://eurosport-live-prod.akamai.prod-live.h264.io/
+	# tant que notre url ne contient pas eurosport-
+	while ("eurosport-" not in data_output["url"]) and (i < max_try):
 
-										url = stream["url"]
+		r = requests.post("https://eu3-prod.disco-api.com/playback/v3/videoPlaybackInfo", json=data_json, headers=headers)
+		if r.status_code == 200:
+			data_return = r.json()
+			if "data" in data_return:
+				if data_return["data"]:
+					if "attributes" in data_return["data"]:
+						if data_return["data"]["attributes"]:
+							if "streaming" in data_return["data"]["attributes"]:
+								if data_return["data"]["attributes"]["streaming"]:
+									streams = data_return["data"]["attributes"]["streaming"]
 
-										if current_app.config.get('env') == "production":
-											if "dplus-eu-cloudfront.prod-live.h264.io" in url:
-												data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://netflux.fun:2083/tv/eurosport/dplus-eu-cloudfront/")
-											elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
-												data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://netflux.fun:2083/tv/eurosport/eurosport-live-prod/")
-											elif "eurosport-vod.akamai.prod-live.h264.io" in url:
-												data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://netflux.fun:2083/tv/eurosport/eurosport-vod/")
-										else:
-											if "dplus-eu-cloudfront.prod-live.h264.io" in url:
-												data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://netflux.fun:2087/tv/eurosport/dplus-eu-cloudfront/")
-											elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
-												data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://netflux.fun:2087/tv/eurosport/eurosport-live-prod/")
-											elif "eurosport-vod.akamai.prod-live.h264.io" in url:
-												data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://netflux.fun:2087/tv/eurosport/eurosport-vod/")
+									# On parcourt les streams jusqu'à trouver la bonne URL
+									for stream in streams:
+										if stream["type"] == "hls":
+											# On récupère l'URL
+											
+											# https://dplus-eu-cloudfront.prod-live.h264.io/
+											# https://eurosport-live-prod.akamai.prod-live.h264.io/
+
+											url = stream["url"]
+
+											if current_app.config.get('env') == "production":
+												if "dplus-eu-cloudfront.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://netflux.fun:2083/tv/eurosport/dplus-eu-cloudfront/")
+												elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://netflux.fun:2083/tv/eurosport/eurosport-live-prod/")
+												elif "eurosport-vod.akamai.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://netflux.fun:2083/tv/eurosport/eurosport-vod/")
+											else:
+												if "dplus-eu-cloudfront.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://netflux.fun:2087/tv/eurosport/dplus-eu-cloudfront/")
+												elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://netflux.fun:2087/tv/eurosport/eurosport-live-prod/")
+												elif "eurosport-vod.akamai.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://netflux.fun:2087/tv/eurosport/eurosport-vod/")
 
 
 
-										# On vérifie qu'on a bien netflux.fun dans l'url
-										if ("netflux.fun" not in data_output["url"]):
-											data_output["url"] = ""
-											error = "Bad Link"
-											# On envoie un message facebook
-											message = "BUG Application TV : \n\n"
-											message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
-											message += "\t- " + stream["url"]
-											facebookNotification(message)
+											# On vérifie qu'on a bien netflux.fun dans l'url
+											if ("netflux.fun" not in data_output["url"]):
+												data_output["url"] = ""
+												error = "Bad Link"
+												# On envoie un message facebook
+												message = "BUG Application TV : \n\n"
+												message += "Impossibilité de mettre netflux.fun dans le lien : \n\n"
+												message += "\t- " + stream["url"]
+												facebookNotification(message)
 
-										# On arrête la boucle
-										break
+											# On arrête la boucle
+											break
 
+		if "eurosport-" not in data_output["url"]:
+			# On reset l'url
+			data_output["url"] = ""
+			# On ajoute une tentative
+			i += 1
+			time.sleep(1)
 		
 		# https://netflux.fun:2087/tv/eurosport/eurosport-live-prod/index_3.m3u8
 
