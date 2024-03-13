@@ -2,6 +2,7 @@
 from flask import render_template, request, jsonify
 from ..functions.functions import json_return, facebookNotification
 import requests
+from flask import current_app
 
 
 # Permet de récupérer tous les commentaires pour un media
@@ -20,7 +21,24 @@ def getCNewsURL():
 			if data["adswitched"]:
 				if data["adswitched"][0]:
 					if "src" in data["adswitched"][0]:
-						data_output["url"] = data["adswitched"][0]["src"]
+						url = data["adswitched"][0]["src"]
+
+						if current_app.config.get('env') == "production":
+							if "dtd-pfsbo-nea-app-eu-west-1-prod-bo-canal.akamaized.net" in url:
+								data_output["url"] = url.replace("https://dtd-pfsbo-nea-app-eu-west-1-prod-bo-canal.akamaized.net/", "https://tv.netflux.fun:2083/tv/cnews/")
+						else:
+							if "dtd-pfsbo-nea-app-eu-west-1-prod-bo-canal.akamaized.net" in url:
+								data_output["url"] = url.replace("https://dtd-pfsbo-nea-app-eu-west-1-prod-bo-canal.akamaized.net/", "https://tv.netflux.fun:2087/tv/cnews/")
+
+						# On vérifie qu'on a bien tv.netflux.fun dans l'url
+						if ("tv.netflux.fun" not in data_output["url"]):
+							data_output["url"] = ""
+							error = "Bad Link"
+							# On envoie un message facebook
+							message = "BUG Application TV : \n\n"
+							message += "Impossibilité de mettre tv.netflux.fun dans le lien : \n\n"
+							message += "\t- " + json_data["url"]
+							facebookNotification(message)
 	else:
 		error = "Error status."
 
