@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+<body>
+
+<!-- Include Radiant Media Player - here we use the optimised build for Shaka player -->
+<script src="https://cdn.radiantmediatechs.com/rmp/9.14.1/js/rmp-shaka.min.js"></script>
+<!-- Player container element -->
+<div id="rmp"></div>
+<!-- Set up player configuration options -->
+<script>
+
+// {"ServiceResponse":{"Status":"0","NowUTC":"20240312183253","OutData":{"LicenseInfo":"CAISzgMKNwoQ7xeocjfzngwjYY9GlRSTiRIQLCpH3MwacUG2eRmAud6F4RoAIAEoADgAQICangFI1b/CrwYSGQgBEAEYACCAmp4BKICangEwgJqeAUgAUAAaVhIQwzQww4hyBh8OB/xnAQfcoBpA2S9ObHaPU5PqoLJB1kUpEVA7WVL+LHML9fheRISUjMhdj8ZYGI2c5cUVJ5b+3YZQBMRKAFIKum54XRlvc80LwCABGloKEJKcRBLUu03UhzOwX5fWVewSELuy1nI1BBIr3KmseJHvbKUaEJmNFbc/LYxJOJo4o4wBk4wgAigBMgYIABgAIABCEgoQa2MxNgAnjQCNdcVqgAAACGICU0QaWgoQGT72ZwAaSF6wb3zaZlD/axIQaA4BcGiC1Ee6PDXn/rPCpRoQUqz34DDNhROeXsKNvVcqUSACKAIyBggBGAAgAEISChBrYzE2ACeNAI11xWrEAAIMYgJIRBpaChCQbHk69+pKNJygRP3QODshEhCp5SZlgF6kxTKzMdVsCIelGhCtGPvTFxopww/W03HUn7o6IAIoATIGCAAYACAAQhIKEGtjMTYAJ40AjXXFaoAAAAhiAlNEINW/wq8GOOPclZsGUAIaIPOPJ1DHnIpY/mJsxtpz2ArJVlzsqnlcMz/grIQGCoC+IoABq1xLE1fkZ1o8IBQz7Vt4LW23FrMUTQeeV8ZlsNisEcY5Vva0Sh2btv01nSyeTsCFWJ4J7Jhm33RLD37fqNozZBavWdkxeWoWlczACld1hL1lopUsrKcXZ4r6RgZhCNizeqsjehotreZTkSnH0/x+BuQLAQEvV+zWbhfn8fXtEq06MgowMTkuMC4yIEJ1aWx0IG9uIEZlYiAyIDIwMjQgMTg6NTY6MDMgKDE3MDY5Mjg5NjMpQAFKgAIAAAACAAABAAAFABCNdcVq3OelEQAAAFgAAAAQAAAAagAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAnjQAAAAAAACeNAAAAAAAAAAAAAAAAAwAAALAAAAAQAAAAwgAAABAAAADUAAAAEAAAAAAAAAAAAAAA9AAAABAAAAEMAAAAEAAAAR4AAAAQAAABMAAAABAAAAAAAAAAAAAAAVAAAAAQAAABaAAAABAAAAF6AAAAEAAAAYwAAAAQAAAAAAAAAAAAAAD0AAAAELh6LmKGhe/i39ETToYrET7RoYMMr7JI/tDoCq4Aq5wDWAE=","LicenseDuration":"2592000"}}}
+
+// https://ltv.slc-app-aka.prod.bo.canal.canalplustech.pro/api/V4/zones/cpfra/devices/31/apps/1/jobs/GetLicence
+
+
+const src = {
+  dash: 'https://dtd-pfsbo-nea-app-eu-west-1-prod-bo-canal.akamaized.net/plm/657e8488-4763-56c9-af3b-01f2c1658cab/027da5ad-9ad8-5417-8c03-654db079b58e/manifest.mpd?ad=https%3A%2F%2Fdsh-m010.p-cdnlive-edge020310-dual.scy.canalplus-cdn.net%2F__token__exp%253D1710297168~acl%253D%252Flive%252Fdisk%252Fc8-ad-hd%252F%2A%21%252Flive%252Fdisk%252Fc8-hd%252F%2A%21%252Fmedia_convert%252F%2A%21%252Fslates%252F%2A~id%253D01HRSZ0HNMJF2Z0XRPR0YF3RYR~hmac%253D28066802f3e9fc187a3bcfdc25f31a0f8357b12d35ee1e396e37ad97126c7ee8&root=https%3A%2F%2Fdsh-m010.p-cdnlive-edge020310-dual.scy.canalplus-cdn.net%2F__token__exp%253D1710297168~acl%253D%252Flive%252Fdisk%252Fc8-ad-hd%252F%2A%21%252Flive%252Fdisk%252Fc8-hd%252F%2A%21%252Fmedia_convert%252F%2A%21%252Fslates%252F%2A~id%253D01HRSZ0HNMJF2Z0XRPR0YF3RYR~hmac%253D28066802f3e9fc187a3bcfdc25f31a0f8357b12d35ee1e396e37ad97126c7ee8&slate=https%3A%2F%2Fdsh-m010.p-cdnlive-edge020310-dual.scy.canalplus-cdn.net%2F__token__exp%253D1710297168~acl%253D%252Flive%252Fdisk%252Fc8-ad-hd%252F%2A%21%252Flive%252Fdisk%252Fc8-hd%252F%2A%21%252Fmedia_convert%252F%2A%21%252Fslates%252F%2A~id%253D01HRSZ0HNMJF2Z0XRPR0YF3RYR~hmac%253D28066802f3e9fc187a3bcfdc25f31a0f8357b12d35ee1e396e37ad97126c7ee8'
+};
+const settings = {
+  licenseKey: 'CAISzgMKNwoQ7xeocjfzngwjYY9GlRSTiRIQLCpH3MwacUG2eRmAud6F4RoAIAEoADgAQICangFI1b/CrwYSGQgBEAEYACCAmp4BKICangEwgJqeAUgAUAAaVhIQwzQww4hyBh8OB/xnAQfcoBpA2S9ObHaPU5PqoLJB1kUpEVA7WVL+LHML9fheRISUjMhdj8ZYGI2c5cUVJ5b+3YZQBMRKAFIKum54XRlvc80LwCABGloKEJKcRBLUu03UhzOwX5fWVewSELuy1nI1BBIr3KmseJHvbKUaEJmNFbc/LYxJOJo4o4wBk4wgAigBMgYIABgAIABCEgoQa2MxNgAnjQCNdcVqgAAACGICU0QaWgoQGT72ZwAaSF6wb3zaZlD/axIQaA4BcGiC1Ee6PDXn/rPCpRoQUqz34DDNhROeXsKNvVcqUSACKAIyBggBGAAgAEISChBrYzE2ACeNAI11xWrEAAIMYgJIRBpaChCQbHk69+pKNJygRP3QODshEhCp5SZlgF6kxTKzMdVsCIelGhCtGPvTFxopww/W03HUn7o6IAIoATIGCAAYACAAQhIKEGtjMTYAJ40AjXXFaoAAAAhiAlNEINW/wq8GOOPclZsGUAIaIPOPJ1DHnIpY/mJsxtpz2ArJVlzsqnlcMz/grIQGCoC+IoABq1xLE1fkZ1o8IBQz7Vt4LW23FrMUTQeeV8ZlsNisEcY5Vva0Sh2btv01nSyeTsCFWJ4J7Jhm33RLD37fqNozZBavWdkxeWoWlczACld1hL1lopUsrKcXZ4r6RgZhCNizeqsjehotreZTkSnH0/x+BuQLAQEvV+zWbhfn8fXtEq06MgowMTkuMC4yIEJ1aWx0IG9uIEZlYiAyIDIwMjQgMTg6NTY6MDMgKDE3MDY5Mjg5NjMpQAFKgAIAAAACAAABAAAFABCNdcVq3OelEQAAAFgAAAAQAAAAagAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAnjQAAAAAAACeNAAAAAAAAAAAAAAAAAwAAALAAAAAQAAAAwgAAABAAAADUAAAAEAAAAAAAAAAAAAAA9AAAABAAAAEMAAAAEAAAAR4AAAAQAAABMAAAABAAAAAAAAAAAAAAAVAAAAAQAAABaAAAABAAAAF6AAAAEAAAAYwAAAAQAAAAAAAAAAAAAAD0AAAAELh6LmKGhe/i39ETToYrET7RoYMMr7JI/tDoCq4Aq5wDWAE',
+  src: src,
+  width: 640,
+  height: 360,
+  contentMetadata: {
+    poster: [
+      'https://your-poster-url.jpg'
+    ]
+  },
+  // passing DRM settings
+  shakaDrm: {
+    servers: {
+      'com.widevine.alpha': 'edef8ba979d64acea3c827dcd51d21ed'
+    }
+  }
+};
+const rmp = new RadiantMP('rmp');
+rmp.init(settings);
+console.log(rmp)
+rmp.play()
+</script>
+
+</body>
+</html>

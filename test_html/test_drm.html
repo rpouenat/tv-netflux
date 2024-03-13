@@ -1,0 +1,43 @@
+<video-js id='vidjslivestream' controls preload='auto'  class='vjs-16-9 vjs-big-play-centered' ></video-js>
+<link rel=stylesheet media='all' type='text/css' href='https://vjs.zencdn.net/8.6.1/video-js.css'/><style> .vjs-poster{ background-size: 100% !important; } </style><script src='https://vjs.zencdn.net/8.6.1/video.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/videojs-contrib-eme@5.0.1/dist/videojs-contrib-eme.min.js'></script>
+<script type='text/javascript'>
+(function() {
+  var vid = document.getElementById('vidjslivestream');
+  var player = videojs(vid);
+  player.eme();
+  player.on('ready', function() {
+
+  var dashsrc = {
+    src: 'REDACTED.mpd',
+    type: 'application/dash+xml',
+    keySystems: {
+      'com.widevine.alpha': 'https://widevine-dash.ezdrm.com/widevine-php/widevine-foreignkey.php?REDACTED',
+      'com.microsoft.playready': 'https://playready.ezdrm.com/cency/preauth.aspx?REDACTED'
+    }
+  };
+
+  var fairplaysrc = {
+    src: 'REDACTED.m3u8',
+    type: 'application/x-mpegURL',
+    keySystems: {
+        'com.apple.fps.1_0': {
+            certificateUri: 'REDACTED/fairplay.cer',
+            licenseUri: 'https://fps.ezdrm.com/api/licenses/auth?REDACTED',
+            options: {
+                persistentState: 'required'
+            }
+        }
+    }
+  };
+  if (videojs.browser.IS_ANY_SAFARI){
+    player.src(fairplaysrc);
+  } else if(videojs.browser.IS_IOS && videojs.browser.IS_CHROMIUM) {
+    player.src(fairplaysrc);
+  } else {
+    player.src(dashsrc);
+  }
+});
+
+})();
+</script>

@@ -7,6 +7,7 @@ from .groupetf1.groupetf1 import getUrlGroupeTF1
 from .francetv.francetv import getUrlFranceTV
 from .arte.arte import getArteURL
 from .eurosport.eurosport import getEurosportURL
+from .canal.c8 import getC8URL
 
 
 
@@ -31,6 +32,11 @@ def getTVURL(chaine_name):
 	elif chaine_name == "arte":
 		error, data_output = getArteURL()
 
+	# C8
+	elif chaine_name == "c8":
+		error, data_output = getC8URL()
+
+	# Eurosport
 	elif "eurosport" in chaine_name:
 		error, data_output = getEurosportURL(chaine_name)
 
