@@ -2,6 +2,10 @@ from flask import Flask
 import json
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+
+from flask_cors import CORS
+
+
 # from flask_bcrypt import Bcrypt
 import os
 
@@ -17,6 +21,7 @@ def getConf():
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
 
     # On positionne la configuration de l'application
     configuration = getConf()

@@ -40842,13 +40842,10 @@ function XHRLoader(cfg) {
   }
 
   function request(httpRequest) {
-    console.log("[+] request(httpRequest)")
-    console.log(httpRequest)
     // Variables will be used in the callback functions
     var requestStartTime = new Date();
     var request = httpRequest.request;
     var xhr = new XMLHttpRequest();
-    // console.log("[+] request(httpRequest) : " +  httpRequest.url)
     xhr.open(httpRequest.method, httpRequest.url, true);
 
     if (request.responseType) {
@@ -40902,7 +40899,6 @@ function XHRLoader(cfg) {
     load: load,
     abort: abort
   };
-  // console.log(instance)
   return instance;
 }
 
@@ -41030,26 +41026,14 @@ var CommonEncryption = /*#__PURE__*/function () {
   }, {
     key: "getPSSHForKeySystem",
     value: function getPSSHForKeySystem(keySystem, initData) {
-      console.log("[+] getPSSHForKeySystem : ")
-      console.log("[+]\tkeySystem : ")
-      console.log(keySystem)
       var psshList = CommonEncryption.parsePSSHList(initData);
 
       if (keySystem && psshList.hasOwnProperty(keySystem.uuid.toLowerCase())) {
-        console.log("[+]\psshList[keySystem.uuid.toLowerCase()] : ")
-        console.log(psshList[keySystem.uuid.toLowerCase()])
-        // console.log("[+] keySystem.getInitData()")
-        // console.log(keySystem.getInitData())
         return psshList[keySystem.uuid.toLowerCase()];
       }
 
-    // schemeIdURI: "urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed"
-    // systemString: "com.widevine.alpha"
-    // uuid: "edef8ba9-79d6-4ace-a3c8-27dcd51d21ed"
-
       return null;
     }
-
     /**
      * Parse a standard common encryption PSSH which contains a simple
      * base64-encoding of the init data
@@ -41176,7 +41160,7 @@ var CommonEncryption = /*#__PURE__*/function () {
         pssh[systemID] = dv.buffer.slice(boxStart, nextBox);
         byteCursor = nextBox;
       }
-      console.log(pssh)
+
       return pssh;
     }
   }, {
@@ -42395,7 +42379,6 @@ function ProtectionController(config) {
     eventBus.trigger(events.KEY_MESSAGE, {
       data: keyMessage
     });
-    console.log("[+] _onKeyMessage : " + keyMessage.messageType)
     var messageType = keyMessage.messageType ? keyMessage.messageType : 'license-request';
     var message = keyMessage.message;
     var sessionToken = keyMessage.sessionToken;
@@ -42473,8 +42456,7 @@ function ProtectionController(config) {
     var keySystemString = selectedKeySystem ? selectedKeySystem.systemString : null; // Determine license server URL
 
     var url = _getLicenseServerUrl(protData, messageType, sessionToken, keyMessage, licenseServerData); // Ensure valid license server URL
-    // https://lic.drmtoday.com/license-proxy-widevine/cenc/
-    console.log(url)
+
 
     if (!url) {
       _sendLicenseRequestCompleteEvent(eventData, new _vo_DashJSError__WEBPACK_IMPORTED_MODULE_4__["default"](_errors_ProtectionErrors__WEBPACK_IMPORTED_MODULE_3__["default"].MEDIA_KEY_MESSAGE_NO_LICENSE_SERVER_URL_ERROR_CODE, _errors_ProtectionErrors__WEBPACK_IMPORTED_MODULE_3__["default"].MEDIA_KEY_MESSAGE_NO_LICENSE_SERVER_URL_ERROR_MESSAGE));
@@ -42513,9 +42495,6 @@ function ProtectionController(config) {
       if (xhr.status >= 200 && xhr.status <= 299) {
         var responseHeaders = _core_Utils__WEBPACK_IMPORTED_MODULE_8__["default"].parseHttpHeaders(xhr.getAllResponseHeaders ? xhr.getAllResponseHeaders() : null);
         var licenseResponse = new _vo_LicenseResponse__WEBPACK_IMPORTED_MODULE_6__["default"](xhr.responseURL, responseHeaders, xhr.response);
-        console.log("[+] licenseResponse : ")
-        console.log(licenseResponse)
-        console.log(licenseResponse.data)
         var licenseResponseFilters = customParametersModel.getLicenseResponseFilters();
 
         _applyFilters(licenseResponseFilters, licenseResponse).then(function () {
@@ -42548,8 +42527,6 @@ function ProtectionController(config) {
     var timeout = protData && !isNaN(protData.httpTimeout) ? protData.httpTimeout : LICENSE_SERVER_REQUEST_DEFAULT_TIMEOUT;
     var sessionId = sessionToken.getSessionId() || null;
     var licenseRequest = new _vo_LicenseRequest__WEBPACK_IMPORTED_MODULE_5__["default"](url, reqMethod, responseType, reqHeaders, withCredentials, messageType, sessionId, reqPayload);
-    console.log("[+] licenseRequest : ")
-    console.log(licenseRequest)
     var retryAttempts = !isNaN(settings.get().streaming.retryAttempts[_vo_metrics_HTTPRequest__WEBPACK_IMPORTED_MODULE_7__.HTTPRequest.LICENSE]) ? settings.get().streaming.retryAttempts[_vo_metrics_HTTPRequest__WEBPACK_IMPORTED_MODULE_7__.HTTPRequest.LICENSE] : LICENSE_SERVER_REQUEST_RETRIES;
     var licenseRequestFilters = customParametersModel.getLicenseRequestFilters();
 
@@ -42567,12 +42544,6 @@ function ProtectionController(config) {
    * @param {function} onError
    * @private
    */
-
-  function toHexString(byteArray) {
-    return Array.from(byteArray, function(byte) {
-      return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-    }).join('')
-  }
 
 
   function _doLicenseRequest(request, retriesCount, timeout, onLoad, onAbort, onError) {
@@ -42593,7 +42564,6 @@ function ProtectionController(config) {
       }
     }
 
-    console.log("[+] _doLicenseRequest / request.method : " + request.method)
     xhr.open(request.method, request.url, true);
     xhr.responseType = request.responseType;
     xhr.withCredentials = request.withCredentials;
@@ -42640,14 +42610,6 @@ function ProtectionController(config) {
       licenseXhrRequest = null;
 
       if (this.status >= 200 && this.status <= 299 || retriesCount <= 0) {
-        console.log("[+] xhr.onload :")
-        console.log(this)
-        console.log("[+] _doLicenseRequest / reseved.data : ")
-        console.log(this.response)
-        var tmp = toHexString(this.response)
-        console.log(tmp)
-        var base64_test = btoa(String.fromCharCode.apply(null, new Uint8Array(this.response)));
-        console.log(base64_test)
         onLoad(this);
       } else {
         logger.warn('License request failed (' + this.status + '). Retrying it... Pending retries: ' + retriesCount);
@@ -42680,10 +42642,6 @@ function ProtectionController(config) {
       sessionId: request.sessionId
     });
     licenseXhrRequest = xhr;
-    console.log("[+] _doLicenseRequest / request.data : ")
-    console.log(request.data)
-    var base64_test = btoa(String.fromCharCode.apply(null, new Uint8Array(request.data)));
-    console.log(base64_test)
     xhr.send(request.data);
   }
   /**
@@ -42720,7 +42678,6 @@ function ProtectionController(config) {
   function _getLicenseServerUrl(protData, messageType, sessionToken, keyMessage, licenseServerData) {
     var url = null;
     var message = keyMessage.message; // Check if the url is defined by the application
-    console.log(message)
 
     if (protData && protData.serverURL) {
       var serverURL = protData.serverURL;
@@ -43162,17 +43119,12 @@ function ProtectionKeyController() {
 
         var protData = _getProtDataForKeySystem(ks.systemString, protDataSet);
 
-        // console.log(protData)
-
         for (cpIdx = 0; cpIdx < cps.length; ++cpIdx) {
           cp = cps[cpIdx];
 
           if (cp.schemeIdUri.toLowerCase() === ks.schemeIdURI) {
             // Look for DRM-specific ContentProtection
             var initData = ks.getInitData(cp, cencContentProtection);
-            console.log("[+] getSupportedKeySystemsFromContentProtection")
-            console.log(initData)
-            console.log(ks)
             supportedKS.push({
               ks: keySystems[ksIdx],
               keyId: cp.keyId,
@@ -43182,7 +43134,6 @@ function ProtectionKeyController() {
               sessionId: _getSessionId(protData, cp),
               sessionType: _getSessionType(protData, sessionType)
             });
-            console.log(supportedKS)
           }
         }
       }
@@ -43266,20 +43217,11 @@ function ProtectionKeyController() {
         BASE64: BASE64
       });
     } else if (keySystem.systemString === _constants_ProtectionConstants__WEBPACK_IMPORTED_MODULE_9__["default"].WIDEVINE_KEYSTEM_STRING) {
-      console.log("[+] " + keySystem.systemString)
       licenseServerData = (0,_servers_Widevine__WEBPACK_IMPORTED_MODULE_7__["default"])(context).getInstance();
-      console.log("[+] licenseServerData : ")
-      console.log(licenseServerData)
     } else if (keySystem.systemString === _constants_ProtectionConstants__WEBPACK_IMPORTED_MODULE_9__["default"].PLAYREADY_KEYSTEM_STRING) {
-      console.log("[+] " + keySystem.systemString)
       licenseServerData = (0,_servers_PlayReady__WEBPACK_IMPORTED_MODULE_6__["default"])(context).getInstance();
-      console.log("[+] licenseServerData : ")
-      console.log(licenseServerData)
     } else if (keySystem.systemString === _constants_ProtectionConstants__WEBPACK_IMPORTED_MODULE_9__["default"].CLEARKEY_KEYSTEM_STRING) {
-      console.log("[+] " + keySystem.systemString)
       licenseServerData = (0,_servers_ClearKey__WEBPACK_IMPORTED_MODULE_8__["default"])(context).getInstance();
-      console.log("[+] licenseServerData : ")
-      console.log(licenseServerData)
     }
 
     return licenseServerData;
@@ -45079,40 +45021,19 @@ function ProtectionModel_21Jan2015(config) {
   }
 
   function updateKeySession(sessionToken, message) {
-
-    console.log("[+] updateKeySession : ")
-    console.log(sessionToken)
     var session = sessionToken.session; // Send our request to the key session
 
     if (protectionKeyController.isClearKey(keySystem)) {
       message = message.toJWK();
     }
 
-    console.log("[+] updateKeySession : ")
-    console.log(sessionToken)
-    // console.log(typeof(message))
-    // console.log(message)
-    // var base64_test = btoa(String.fromCharCode.apply(null, new Uint8Array(message)));
-    // console.log(base64_test)
-    // console.log("[+] Session Before : ")
-    // console.log(sessionToken)
-    // console.log(session)
-
-    // setTimeout(() => console.log("Third"), 3000)
-
     session.update(message).then(function () {
       eventBus.trigger(events.KEY_SESSION_UPDATED);
-        console.log("[+] Session After : ")
-        console.log(sessionToken)
-        // console.log(session)
-
     })["catch"](function (error) {
-      console.log(error);
       eventBus.trigger(events.KEY_ERROR, {
         error: new _vo_DashJSError__WEBPACK_IMPORTED_MODULE_3__["default"](_errors_ProtectionErrors__WEBPACK_IMPORTED_MODULE_2__["default"].MEDIA_KEYERR_CODE, 'Error sending update() message! ' + error.name, sessionToken)
       });
     });
-
   }
 
   function loadKeySession(ksInfo) {
@@ -45629,7 +45550,6 @@ function ProtectionModel_3Feb2014(config) {
   }
 
   function updateKeySession(sessionToken, message) {
-    console.log("[+] 45580 updateKeySession")
     var session = sessionToken.session;
 
     if (!protectionKeyController.isClearKey(keySystem)) {

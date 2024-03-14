@@ -15,16 +15,13 @@
         var protData = {
             "com.widevine.alpha": {
                 // "serverURL": "https://drm-widevine-licensing.axtest.net/AcquireLicense",
-                "serverURL": "http://127.0.0.1:5001/license",
-                "httpRequestHeaders": {
-                    "X-AxDRM-Message": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJzaW9uIjoxLCJjb21fa2V5X2lkIjoiYjMzNjRlYjUtNTFmNi00YWUzLThjOTgtMzNjZWQ1ZTMxYzc4IiwibWVzc2FnZSI6eyJ0eXBlIjoiZW50aXRsZW1lbnRfbWVzc2FnZSIsImtleXMiOlt7ImlkIjoiOWViNDA1MGQtZTQ0Yi00ODAyLTkzMmUtMjdkNzUwODNlMjY2IiwiZW5jcnlwdGVkX2tleSI6ImxLM09qSExZVzI0Y3Iya3RSNzRmbnc9PSJ9XX19.4lWwW46k-oWcah8oN18LPj5OLS5ZU-_AQv7fe0JhNjA"
-                },
+                "serverURL": "http://127.0.0.1:5001/m6/license",
                 priority: 0
             }
         };
         var video,
             player,
-            url = "https://media.axprod.net/TestVectors/v7-MultiDRM-SingleKey/Manifest_1080p.mpd";
+            url = "https://csm-e-cem6aeuw1live208-0b05c26c00a8e030e.bln1.yospace.com/csm/live/638364654.m3u8;jsessionid=A335C1ACC15B48AC3B1A9FBD0E04EAF6.csm-e-cem6aeuw1live208-0b05c26c00a8e030e.bln1.yospace.com?yo.pdt=true&yo.br=false&yo.av=3&yo.hb=6000&yo.eb.fb=aHR0cHM6Ly9vcmlnaW4tMThjZDYwZGVhODE5MDUyOC5saXZlLjZjbG91ZC5mci9vdXQvdjEvNTVjYzk2MTNkNzkzNDQ4OTg4YjY4OGEzOTcwM2E5ODcvaGxzX3Nob3J0X2ZwMDBfbTZfaGRhaW5kZXgubTN1OA%3D%3D&csid=6Play_m6replay_iPhone_Livedai&_fw_cookie_consent=1&adsSessionId=page_65f2b185bcfdd6.89376868&visitor=206a2bd416154ecda98e608cb6d7358b&sitesection=6Play_m6replay_iPhone_Livedai&caid=program_1260&_fw_gdpr=1&_fw_vcid2=206a2bd416154ecda98e608cb6d7358b&_fw_gdpr_consent=CP7NIEAP7NIEAAHABAFRAqEsAP_gAAAgAAqIJvEB7DrMASNgAXBxIPMEAAAUwQASgEAgBAAAAQgAAABEAJQAkGAgAADAAIACAAIAIEJBAQBkAAFAAEAAIAAAACGEAAAAABAAIgBAAAABAERACAAAAQAAAAIQAAAAAAAAgAIAAAogAEAAAgAgAEAAIAIAAIABAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAABArmAKADUAjgCYgFNAK5AFCQAYAAiDUOgAwABEGohABgACINRKADAAEQaikAGAAIg1A&prof=510962:m6_yospace_ios_ssai_live&externalId=6play-max-m6-hls";
 
         video = document.querySelector("video");
         player = dashjs.MediaPlayer().create();

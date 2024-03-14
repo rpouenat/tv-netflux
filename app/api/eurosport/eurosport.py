@@ -66,7 +66,7 @@ def getEurosportURL(chaine_name):
 	data_output = {}
 	data_output["url"] = ""
 	# On set le type de vidéo récupéré
-	data_output["type"] = "application/dash+x-mpegURL"
+	data_output["type"] = "application/x-mpegURL"
 
 	token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmVlYWRlNTcxLTQzOGYtNDUwNC1hMDJmLWIwYzc2ZGY2YWNmZSIsImp0aSI6InRva2VuLWZiNmRiYzc5LTUzMGEtNGM5OC05MzJiLTYyYjZmMGE0ZDFkZCIsImFub255bW91cyI6ZmFsc2UsImlhdCI6MTcxMDE2MzM1Mn0.t45-tK2OotOLWViUk7xYauFRd7G1rO3vaCfPq3iksM4"
 
@@ -106,8 +106,8 @@ def getEurosportURL(chaine_name):
 
 									# On parcourt les streams jusqu'à trouver la bonne URL
 									for stream in streams:
-										print(stream)
-										if stream["type"] == "dash":
+										# print(stream)
+										if stream["type"] == "hls":
 											# On récupère l'URL
 											
 											# https://dplus-eu-cloudfront.prod-live.h264.io/

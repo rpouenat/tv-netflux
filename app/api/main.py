@@ -8,7 +8,7 @@ from .francetv.francetv import getUrlFranceTV
 from .arte.arte import getArteURL
 from .eurosport.eurosport import getEurosportURL
 from .canal.canal import getC8URL, getCNewsURL
-
+from flask import Response
 
 
 # Permet de récupérer tous les commentaires pour un media

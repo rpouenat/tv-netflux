@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script src="src/dash.all.debug.js"></script>
+</head>
+<body>
+
+<video controls="true" preload="auto" src="" autoplay=""></video>
+
+<script>
+    function init() {
+        var protData = {
+            "com.widevine.alpha": {
+                "serverURL": "https://discovery-eur.conax.cloud/fairplay/clearkey",
+                "httpRequestHeaders": {
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSSUQ6ZXVyb3Nwb3J0OmVlYWRlNTcxLTQzOGYtNDUwNC1hMDJmLWIwYzc2ZGY2YWNmZSIsImp0aSI6InRva2VuLWZiNmRiYzc5LTUzMGEtNGM5OC05MzJiLTYyYjZmMGE0ZDFkZCIsImFub255bW91cyI6ZmFsc2UsImlhdCI6MTcxMDE2MzM1Mn0.t45-tK2OotOLWViUk7xYauFRd7G1rO3vaCfPq3iksM4"
+                },
+                priority: 0
+            }
+        };
+        var video,
+            player,
+            url = "https://tv.netflux.fun:2087/tv/eurosport/eurosport-vod/primary/5/a735f4d692874e33b7e174f9ed771bce/1af82613db434d19aad1d23444f14e28/hdntl=exp=1710391113~acl=/primary/5/a735f4d692874e33b7e174f9ed771bce/1af82613db434d19aad1d23444f14e28/*~data=hdntl~hmac=a4906877b55f576f30e26a8e8fec5b1853d10a55fc085684f117dad44e3f7b8c/6b593d9217dc4f4590fda9caf555a85e/index.mpd?aws.manifestfilter=audio_codec:AACL;video_codec:h264;video_dynamic_range:sdr;video_height:1-1080&hdnts=exp=1710391113~acl=/primary/5/a735f4d692874e33b7e174f9ed771bce/1af82613db434d19aad1d23444f14e28/6b593d9217dc4f4590fda9caf555a85e/index.mpd%3Faws.manifestfilter%3Daudio_codec%3AAACL%3Bvideo_codec%3Ah264%3Bvideo_dynamic_range%3Asdr%3Bvideo_height%3A1-1080*~hmac=a691cc0e663db0e2fcd5a4f3833aecafe477ba202326754e67ec5caa852b46ca";
+
+        video = document.querySelector("video");
+        player = dashjs.MediaPlayer().create();
+        player.initialize(video, url, true);
+        player.setProtectionData(protData);
+    }
+
+    function check() {
+        if (location.protocol === 'http:' && location.hostname !== 'localhost') {
+            var out = 'This page has been loaded under http. This might result in the EME APIs not being available to the player and any DRM-protected content will fail to play. ' +
+                'If you wish to test manifest URLs that require EME support, then <a href=\'https:' + window.location.href.substring(window.location.protocol.length) + '\'>reload this page under https</a>.'
+            var div = document.getElementById('http-warning');
+            div.innerHTML = out;
+            div.style.display = ''
+        }
+    }
+    init()
+</script>
+
+
+</body>
+</html>
