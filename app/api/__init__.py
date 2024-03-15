@@ -7,3 +7,4 @@ from . import main
 from .eurosport import eurosport
 from .test_drm import sample
 from .groupem6 import m6
+from .groupecanal import canal
