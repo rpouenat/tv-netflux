@@ -69,7 +69,11 @@ def getLiveTV():
 			if link:
 				id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
 
-			progress = card.find('span', {"data-testid": "atom-progress-bar-inside"})["style"].split(":")[1].replace("%","")
+			progress = card.find('span', {"data-testid": "atom-progress-bar-inside"})
+			if progress:
+				progress = progress["style"].split(":")[1].replace("%","")
+			else:
+				progress = 0
 
 			# On récupère les images
 			img = card.find('source')
