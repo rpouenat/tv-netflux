@@ -14,6 +14,7 @@ import requests
 from flask import current_app
 from .. import api
 from bs4 import BeautifulSoup
+import base64
 import time
 
 
@@ -75,7 +76,10 @@ def getLiveTV():
 			if img:
 				img = img.get("srcset")
 				if img:
-					img = img.replace("https://imgresizer.eurosport.com/", "https://netflux.fun:2087/tv/eurosport/img/")
+					# img = img.replace("https://imgresizer.eurosport.com/", "https://netflux.fun:2087/tv/eurosport/img/")
+					# On récupère l'image en base64
+					response = requests.get(img)
+					img = base64.b64encode(response.content).decode('utf-8')
 
 		# table_result = soup.findAll('a', {"class": "HybridCard card-hover card-hover relative mx-auto flex"})
 		# for link in table_result:
