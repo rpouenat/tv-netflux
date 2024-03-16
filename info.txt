@@ -14,15 +14,6 @@ Create :
 	$ export DISPLAY=:99
 
 
-Permet de contrôler à distance les écrans : 
-
-	$ sudo apt install tigervnc-standalone-server
-	$ vncserver :3 -geometry 1920x1080 -localhost no
-	$ vncserver -kill :3
-	$ (pour raspberrry sudo apt install xterm)
-
-	Lister tous les écrans
-
 
 
 

@@ -35,17 +35,63 @@ def getLiveTV():
 	if req.status_code == 200:
 		soup = BeautifulSoup(req.text, 'html.parser')
 		# On récupère les résultats 
-		table_result = soup.findAll('a', {"class": "HybridCard card-hover card-hover relative mx-auto flex"})
-		for link in table_result:
-			# On récupère le nom de la chaine
-			title = link.find('h3', {"class": "card-hover-underline"}).getText()
-			# On récupère l'ID de la chaine
-			id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
+
+		list_data = soup.find('div', {"class": "sliderTray___-vHFQ sliderAnimation___300FY carousel__slider-tray carousel__slider-tray--horizontal"})
+
+		# print(list_data)
+
+		caroussel = list_data.findAll('div', {"class": "slideInner___2mfX9 carousel__inner-slide"})
+
+		for card in caroussel:
+
+			# print(card)
+
+			min_title = None
+			data_min_title = card.find('div', {"class": "font-bold caps-s7-fx lines-1 text-onDark-03"})
+			if data_min_title:
+				min_title = data_min_title.getText()
+
+			title = None
+			data_title = card.find('h3', {"class": "card-hover-underline"})
+			if data_title:
+				title = data_title.getText()
+
+
+			sub_title = None
+			data_sub_title = card.find('p', {"class": "caption-s4-fx lines-1 text-onDark-05"})
+			if data_sub_title:
+				sub_title = data_sub_title.getText()
+
+
+			id_channel = None
+			link = card.find('a', {"class": "HybridCard card-hover card-hover relative mx-auto flex"})
+			if link:
+				id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
+
+			progress = card.find('span', {"data-testid": "atom-progress-bar-inside"})["style"].split(":")[1].replace("%","")
+
+			# On récupère les images
+			img = card.find('source')
+			if img:
+				img = img.get("srcset")
+				if img:
+					img = img.replace("https://imgresizer.eurosport.com/", "https://netflux.fun:2087/tv/eurosport/img/")
+
+		# table_result = soup.findAll('a', {"class": "HybridCard card-hover card-hover relative mx-auto flex"})
+		# for link in table_result:
+		# 	# On récupère le nom de la chaine
+		# 	title = link.find('h3', {"class": "card-hover-underline"}).getText()
+		# 	# On récupère l'ID de la chaine
+		# 	id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
 
 			data_output.append({
 				"type_tv" : "eurosport", # On set le type de chaine (tnt, canal, etc ...)
+				"min_title" : min_title,
+				"sub_title" : sub_title,
+				"progress": progress,
 				"name" : title, # On positionne le nom de la chaine
 				"url" : id_channel, # On set son id
+				"img": img,
 				"status" : 1 # On set la chaine active
 			})
 
