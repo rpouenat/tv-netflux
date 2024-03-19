@@ -168,34 +168,34 @@ def getEurosportURL(chaine_name):
 											# https://eurosport-live-prod.akamai.prod-live.h264.io/
 
 											url = stream["url"]
-											data_output["url"] = url
+											# data_output["url"] = url
 
-											# if current_app.config.get('env') == "production":
-											# 	if "dplus-eu-cloudfront.prod-live.h264.io" in url:
-											# 		data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://tv.netflux.fun:2083/tv/eurosport/dplus-eu-cloudfront/")
-											# 	elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
-											# 		data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2083/tv/eurosport/eurosport-live-prod/")
-											# 	elif "eurosport-vod.akamai.prod-live.h264.io" in url:
-											# 		data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2083/tv/eurosport/eurosport-vod/")
-											# else:
-											# 	if "dplus-eu-cloudfront.prod-live.h264.io" in url:
-											# 		data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://tv.netflux.fun:2087/tv/eurosport/dplus-eu-cloudfront/")
-											# 	elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
-											# 		data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2087/tv/eurosport/eurosport-live-prod/")
-											# 	elif "eurosport-vod.akamai.prod-live.h264.io" in url:
-											# 		data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2087/tv/eurosport/eurosport-vod/")
+											if current_app.config.get('env') == "production":
+												if "dplus-eu-cloudfront.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://tv.netflux.fun:2083/tv/eurosport/dplus-eu-cloudfront/")
+												elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2083/tv/eurosport/eurosport-live-prod/")
+												elif "eurosport-vod.akamai.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2083/tv/eurosport/eurosport-vod/")
+											else:
+												if "dplus-eu-cloudfront.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://tv.netflux.fun:2087/tv/eurosport/dplus-eu-cloudfront/")
+												elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2087/tv/eurosport/eurosport-live-prod/")
+												elif "eurosport-vod.akamai.prod-live.h264.io" in url:
+													data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2087/tv/eurosport/eurosport-vod/")
 
 
 
-											# # On vérifie qu'on a bien tv.netflux.fun dans l'url
-											# if ("tv.netflux.fun" not in data_output["url"]):
-											# 	data_output["url"] = ""
-											# 	error = "Bad Link"
-											# 	# On envoie un message facebook
-											# 	message = "BUG Application TV : \n\n"
-											# 	message += "Impossibilité de mettre tv.netflux.fun dans le lien : \n\n"
-											# 	message += "\t- " + stream["url"]
-											# 	facebookNotification(message)
+											# On vérifie qu'on a bien tv.netflux.fun dans l'url
+											if ("tv.netflux.fun" not in data_output["url"]):
+												data_output["url"] = ""
+												error = "Bad Link"
+												# On envoie un message facebook
+												message = "BUG Application TV : \n\n"
+												message += "Impossibilité de mettre tv.netflux.fun dans le lien : \n\n"
+												message += "\t- " + stream["url"]
+												facebookNotification(message)
 
 											# On arrête la boucle
 											break
