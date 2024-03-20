@@ -14,6 +14,7 @@ import requests
 from flask import current_app
 from .. import api
 from bs4 import BeautifulSoup
+from datetime import datetime
 import base64
 import time
 
@@ -23,86 +24,200 @@ import time
 @api.route('/eurosport/livechannel', methods=['GET'])
 def getLiveTV():
 
+	# https://i.eurosport.com/taiga/Specifique/Crop/16_9/3_3_15327465_20240318-101508.jpeg
+	# https://i.eurosport.com/taiga/Specifique/Crop/3_4/3_3_15327465_20240318-101508.jpeg
+
 	error = ""
-	data_output = []
+
+	date_now = datetime.now()
+	year = date_now.year
+	month = date_now.month
+	day = date_now.day
 
 	headers = {
-		"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+		'Host' : 'netsport.eurosport.io',
+		'Accept' : '*/*',
+		'apollographql-client-version' : '8.3.1-2402211605',
+		'x-device' : 'MOBILE',
+		'domain' : 'www.eurosport.fr+mobile',
+		'Accept-Language' : 'fr-FR,fr;q=0.9',
+		'Accept-Encoding' : 'gzip, deflate',
+		'Content-Type' : 'application/json',
+		'X-APOLLO-OPERATION-ID' : 'a59a5be2ea13e2055a5dc9c13c44635c942d27bd521eb3b44c52379eafb746dd',
+		'X-APOLLO-OPERATION-TYPE' : 'query',
+		'premium-country-code' : 'FR',
+		'apollographql-client-name' : 'com.eurosport.EurosportNews-apollo-ios',
+		'User-Agent' : 'EurosportNews/2402211605 CFNetwork/1492.0.1 Darwin/23.3.0',
+		'Connection' : 'close',
+		'x-insert-ads' : 'true',
+		'X-APOLLO-OPERATION-NAME' : 'ProgramsAt'
 	}
 
-	# On fait une requête vers eurosport
-	req = requests.get("https://www.eurosport.fr/watch/", headers=headers)
+	url = "https://netsport.eurosport.io/?extensions=%7B%22persistedQuery%22:%7B%22sha256Hash%22:%22a59a5be2ea13e2055a5dc9c13c44635c942d27bd521eb3b44c52379eafb746dd%22,%22version%22:1%7D%7D&operationName=ProgramsAt&variables=%7B%22date%22:%22" + str(year) + "-" + str('%02d' % month) + "-"+str('%02d' % (int(day) - 1))+"T23:00:00.000Z%22,%22first%22:30,%22includesOnAirPrograms%22:true%7D"
 
-	if req.status_code == 200:
-		soup = BeautifulSoup(req.text, 'html.parser')
-		# On récupère les résultats 
+	r = requests.get(url, headers=headers)
+	# print(r.text)
 
-		list_data = soup.find('div', {"class": "sliderTray___-vHFQ sliderAnimation___300FY carousel__slider-tray carousel__slider-tray--horizontal"})
+	if r.status_code == 200:
+		data_json = r.json()
+		if "data" in data_json:
+			if "programsByDate" in data_json["data"]:
+				if "edges" in data_json["data"]["programsByDate"]:
 
-		# print(list_data)
+					# On retourne la liste des replays
+					data_output = data_json["data"]["programsByDate"]["edges"]
 
-		caroussel = list_data.findAll('div', {"class": "slideInner___2mfX9 carousel__inner-slide"})
+				else:
+					error = "No edges"
 
-		for card in caroussel:
-
-			# print(card)
-
-			min_title = None
-			data_min_title = card.find('div', {"class": "font-bold caps-s7-fx lines-1 text-onDark-03"})
-			if data_min_title:
-				min_title = data_min_title.getText()
-
-			title = None
-			data_title = card.find('h3', {"class": "card-hover-underline"})
-			if data_title:
-				title = data_title.getText()
-
-
-			sub_title = None
-			data_sub_title = card.find('p', {"class": "caption-s4-fx lines-1 text-onDark-05"})
-			if data_sub_title:
-				sub_title = data_sub_title.getText()
-
-
-			id_channel = None
-			link = card.find('a', {"class": "HybridCard card-hover card-hover relative mx-auto flex"})
-			if link:
-				id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
-
-			progress = card.find('span', {"data-testid": "atom-progress-bar-inside"})
-			if progress:
-				progress = progress["style"].split(":")[1].replace("%","")
 			else:
-				progress = 0
+				error = "No programsByDate"
 
-			# On récupère les images
-			img = card.find('source')
-			if img:
-				img = img.get("srcset")
-				if img:
-					# img = img.replace("https://imgresizer.eurosport.com/", "https://netflux.fun:2087/tv/eurosport/img/")
-					# On récupère l'image en base64
-					response = requests.get(img)
-					img = base64.b64encode(response.content).decode('utf-8')
+		else:
+			error = "No data."
+	else:
+		error = "Can't connect"
 
-		# table_result = soup.findAll('a', {"class": "HybridCard card-hover card-hover relative mx-auto flex"})
-		# for link in table_result:
-		# 	# On récupère le nom de la chaine
-		# 	title = link.find('h3', {"class": "card-hover-underline"}).getText()
-		# 	# On récupère l'ID de la chaine
-		# 	id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
+	# # error = ""
+	# # data_output = []
 
-			data_output.append({
-				"type_tv" : "eurosport", # On set le type de chaine (tnt, canal, etc ...)
-				"min_title" : min_title,
-				"sub_title" : sub_title,
-				"progress": progress,
-				"name" : title, # On positionne le nom de la chaine
-				"url" : id_channel, # On set son id
-				"img": img,
-				"status" : 1 # On set la chaine active
-			})
+	# # headers = {
+	# # 	"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+	# # }
 
+	# # # On fait une requête vers eurosport
+	# # req = requests.get("https://www.eurosport.fr/watch/", headers=headers)
+
+	# # if req.status_code == 200:
+	# # 	soup = BeautifulSoup(req.text, 'html.parser')
+	# # 	# On récupère les résultats 
+
+	# # 	list_data = soup.find('div', {"class": "sliderTray___-vHFQ sliderAnimation___300FY carousel__slider-tray carousel__slider-tray--horizontal"})
+
+	# # 	# print(list_data)
+
+	# # 	caroussel = list_data.findAll('div', {"class": "slideInner___2mfX9 carousel__inner-slide"})
+
+	# # 	for card in caroussel:
+
+	# # 		# print(card)
+
+	# # 		min_title = None
+	# # 		data_min_title = card.find('div', {"class": "font-bold caps-s7-fx lines-1 text-onDark-03"})
+	# # 		if data_min_title:
+	# # 			min_title = data_min_title.getText()
+
+	# # 		title = None
+	# # 		data_title = card.find('h3', {"class": "card-hover-underline"})
+	# # 		if data_title:
+	# # 			title = data_title.getText()
+
+
+	# # 		sub_title = None
+	# # 		data_sub_title = card.find('p', {"class": "caption-s4-fx lines-1 text-onDark-05"})
+	# # 		if data_sub_title:
+	# # 			sub_title = data_sub_title.getText()
+
+
+	# # 		id_channel = None
+	# # 		link = card.find('a', {"class": "HybridCard card-hover card-hover relative mx-auto flex"})
+	# # 		if link:
+	# # 			id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
+
+	# # 		progress = card.find('span', {"data-testid": "atom-progress-bar-inside"})
+	# # 		if progress:
+	# # 			progress = progress["style"].split(":")[1].replace("%","")
+	# # 		else:
+	# # 			progress = 0
+
+	# # 		# On récupère les images
+	# # 		img = card.find('source')
+	# # 		if img:
+	# # 			img = img.get("srcset")
+	# # 			if img:
+	# # 				# img = img.replace("https://imgresizer.eurosport.com/", "https://netflux.fun:2087/tv/eurosport/img/")
+	# # 				# On récupère l'image en base64
+	# # 				response = requests.get(img)
+	# # 				img = base64.b64encode(response.content).decode('utf-8')
+
+	# # 	# table_result = soup.findAll('a', {"class": "HybridCard card-hover card-hover relative mx-auto flex"})
+	# # 	# for link in table_result:
+	# # 	# 	# On récupère le nom de la chaine
+	# # 	# 	title = link.find('h3', {"class": "card-hover-underline"}).getText()
+	# # 	# 	# On récupère l'ID de la chaine
+	# # 	# 	id_channel = "eurosport-" + link['href'].split("/")[-2].split("-")[-1]
+
+	# 		data_output.append({
+	# 			"type_tv" : "eurosport", # On set le type de chaine (tnt, canal, etc ...)
+	# 			"min_title" : min_title,
+	# 			"sub_title" : sub_title,
+	# 			"progress": progress,
+	# 			"name" : title, # On positionne le nom de la chaine
+	# 			"url" : id_channel, # On set son id
+	# 			"img": img,
+	# 			"status" : 1 # On set la chaine active
+	# 		})
+
+
+	# Si on a pas d'erreur 
+	if not error:
+		d = json_return("",200,data_output)
+	else:
+		d = json_return(error,400,"")
+
+	return jsonify(d),200
+
+
+# Permet de récupérer les chaînes en live d'eurosport
+@api.route('/eurosport/replay/', methods=['POST'])
+def getEurosportReplay():
+
+	# curl --header "Content-Type: application/json" --request POST --data '{"year":"2024","month":"03","day":"16"}' http://localhost:5001/eurosport/replay/
+
+	# Si on a bien toutes les données
+	datas = request.get_json()
+	error = ""
+	data_output = {}
+
+	# Si on a des données
+	if datas:
+		year = datas.get('year',None)
+		month = datas.get('month',None)
+		day = datas.get('day',None)
+
+		if (year is not None) and (month is not None) and (day is not None):
+
+			headers = {
+				'Host' : 'netsport.eurosport.io',
+				'Accept' : '*/*',
+				'apollographql-client-version' : '8.3.1-2402211605',
+				'x-device' : 'MOBILE',
+				'domain' : 'www.eurosport.fr+mobile',
+				'Accept-Language' : 'fr-FR,fr;q=0.9',
+				'Accept-Encoding' : 'gzip, deflate',
+				'Content-Type' : 'application/json',
+				'X-APOLLO-OPERATION-ID' : 'a59a5be2ea13e2055a5dc9c13c44635c942d27bd521eb3b44c52379eafb746dd',
+				'X-APOLLO-OPERATION-TYPE' : 'query',
+				'premium-country-code' : 'FR',
+				'apollographql-client-name' : 'com.eurosport.EurosportNews-apollo-ios',
+				'User-Agent' : 'EurosportNews/2402211605 CFNetwork/1492.0.1 Darwin/23.3.0',
+				'Connection' : 'close',
+				'x-insert-ads' : 'true',
+				'X-APOLLO-OPERATION-NAME' : 'ProgramsAt'
+			}
+
+			url = "https://netsport.eurosport.io/?extensions=%7B%22persistedQuery%22:%7B%22sha256Hash%22:%22a59a5be2ea13e2055a5dc9c13c44635c942d27bd521eb3b44c52379eafb746dd%22,%22version%22:1%7D%7D&operationName=ProgramsAt&variables=%7B%22date%22:%22" + str(year) + "-" + str(month) + "-"+str(int(day) - 1)+"T23:00:00.000Z%22,%22first%22:30,%22includesOnAirPrograms%22:false%7D"
+
+			r = requests.get(url, headers=headers)
+
+			if r.status_code == 200:
+				data_json = r.json()
+				if "data" in data_json:
+					if "programsByDate" in data_json["data"]:
+						if "edges" in data_json["data"]["programsByDate"]:
+
+							# On retourne la liste des replays
+							data_output = data_json["data"]["programsByDate"]["edges"]
 
 	# Si on a pas d'erreur 
 	if not error:
@@ -145,7 +260,7 @@ def getEurosportURL(chaine_name):
 
 	# tant que notre url ne contient pas eurosport-
 	while ("eurosport-" not in data_output["url"]) and (i < max_try) and not error:
-		print("[+] Try : " + str(i))
+		# print("[+] Try : " + str(i))
 
 		r = requests.post("https://eu3-prod.disco-api.com/playback/v3/videoPlaybackInfo", json=data_json, headers=headers)
 		if r.status_code == 200:
@@ -200,7 +315,7 @@ def getEurosportURL(chaine_name):
 											# On arrête la boucle
 											break
 
-			print(error)
+			# print(error)
 			if ("eurosport-" not in data_output["url"]) and not error:
 				# On reset l'url
 				data_output["url"] = ""
@@ -213,8 +328,8 @@ def getEurosportURL(chaine_name):
 
 
 		else:
-			print(r.status_code)
-			print(r.text)
+			# print(r.status_code)
+			# print(r.text)
 			error = "Error status."
 
 	return error, data_output
