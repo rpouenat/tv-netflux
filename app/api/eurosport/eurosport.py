@@ -169,10 +169,10 @@ def getLiveTV():
 
 
 # Permet de récupérer les chaînes en live d'eurosport
-@api.route('/eurosport/replay/', methods=['POST'])
+@api.route('/eurosport/replay', methods=['POST'])
 def getEurosportReplay():
 
-	# curl --header "Content-Type: application/json" --request POST --data '{"year":"2024","month":"03","day":"16"}' http://localhost:5001/eurosport/replay/
+	# curl --header "Content-Type: application/json" --request POST --data '{"year":"2024","month":"03","day":"16"}' http://localhost:5001/eurosport/replay
 
 	# Si on a bien toutes les données
 	datas = request.get_json()
