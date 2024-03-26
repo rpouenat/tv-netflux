@@ -206,7 +206,7 @@ def getEurosportReplay():
 				'X-APOLLO-OPERATION-NAME' : 'ProgramsAt'
 			}
 
-			url = "https://netsport.eurosport.io/?extensions=%7B%22persistedQuery%22:%7B%22sha256Hash%22:%22a59a5be2ea13e2055a5dc9c13c44635c942d27bd521eb3b44c52379eafb746dd%22,%22version%22:1%7D%7D&operationName=ProgramsAt&variables=%7B%22date%22:%22" + str(year) + "-" + str(month) + "-"+str(int(day) - 1)+"T23:00:00.000Z%22,%22first%22:30,%22includesOnAirPrograms%22:false%7D"
+			url = "https://netsport.eurosport.io/?extensions=%7B%22persistedQuery%22:%7B%22sha256Hash%22:%22a59a5be2ea13e2055a5dc9c13c44635c942d27bd521eb3b44c52379eafb746dd%22,%22version%22:1%7D%7D&operationName=ProgramsAt&variables=%7B%22date%22:%22" + str(year) + "-" + str(month) + "-"+str(int(day))+"T00:00:00.000Z%22,%22first%22:30,%22includesOnAirPrograms%22:false%7D"
 
 			r = requests.get(url, headers=headers)
 
