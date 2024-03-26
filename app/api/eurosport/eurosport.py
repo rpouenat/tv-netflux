@@ -172,7 +172,7 @@ def getLiveTV():
 @api.route('/eurosport/replay', methods=['POST'])
 def getEurosportReplay():
 
-	# curl --header "Content-Type: application/json" --request POST --data '{"year":"2024","month":"03","day":"16"}' http://localhost:5001/eurosport/replay
+	# curl --header "Content-Type: application/json" --request POST --data '{"year":"2024","month":"03","day":"25"}' http://localhost:5001/eurosport/replay
 
 	# Si on a bien toutes les données
 	datas = request.get_json()
@@ -206,7 +206,7 @@ def getEurosportReplay():
 				'X-APOLLO-OPERATION-NAME' : 'ProgramsAt'
 			}
 
-			url = "https://netsport.eurosport.io/?extensions=%7B%22persistedQuery%22:%7B%22sha256Hash%22:%22a59a5be2ea13e2055a5dc9c13c44635c942d27bd521eb3b44c52379eafb746dd%22,%22version%22:1%7D%7D&operationName=ProgramsAt&variables=%7B%22date%22:%22" + str(year) + "-" + str(month) + "-"+str(int(day) - 1)+"T23:00:00.000Z%22,%22first%22:30,%22includesOnAirPrograms%22:false%7D"
+			url = "https://netsport.eurosport.io/?extensions=%7B%22persistedQuery%22:%7B%22sha256Hash%22:%22a59a5be2ea13e2055a5dc9c13c44635c942d27bd521eb3b44c52379eafb746dd%22,%22version%22:1%7D%7D&operationName=ProgramsAt&variables=%7B%22date%22:%22" + str(year) + "-" + str('%02d' % month) + "-"+str('%02d' % (int(day) - 1))+"T23:00:00.000Z%22,%22first%22:30,%22includesOnAirPrograms%22:false%7D"
 
 			r = requests.get(url, headers=headers)
 
