@@ -285,20 +285,18 @@ def getEurosportURL(chaine_name):
 											url = stream["url"]
 											data_output["url"] = url
 
+											port = "7"
 											if current_app.config.get('env') == "production":
-												if "dplus-eu-cloudfront.prod-live.h264.io" in url:
-													data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://tv.netflux.fun:2083/tv/eurosport/dplus-eu-cloudfront/")
-												elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
-													data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2083/tv/eurosport/eurosport-live-prod/")
-												elif "eurosport-vod.akamai.prod-live.h264.io" in url:
-													data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2083/tv/eurosport/eurosport-vod/")
-											else:
-												if "dplus-eu-cloudfront.prod-live.h264.io" in url:
-													data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://tv.netflux.fun:2087/tv/eurosport/dplus-eu-cloudfront/")
-												elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
-													data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2087/tv/eurosport/eurosport-live-prod/")
-												elif "eurosport-vod.akamai.prod-live.h264.io" in url:
-													data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:2087/tv/eurosport/eurosport-vod/")
+												port = "3"
+
+											if "dplus-eu-cloudfront.prod-live.h264.io" in url:
+												data_output["url"] = url.replace("https://dplus-eu-cloudfront.prod-live.h264.io/", "https://tv.netflux.fun:208"+port+"/tv/eurosport/dplus-eu-cloudfront/")
+											elif "eurosport-live-prod.akamai.prod-live.h264.io" in url:
+												data_output["url"] = url.replace("https://eurosport-live-prod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:208"+port+"/tv/eurosport/eurosport-live-prod/")
+											elif "eurosport-vod.akamai.prod-live.h264.io" in url:
+												data_output["url"] = url.replace("https://eurosport-vod.akamai.prod-live.h264.io/", "https://tv.netflux.fun:208"+port+"/tv/eurosport/eurosport-vod/")
+											elif "live-olympics-discovery.akamai.prod-live.h264.io" in url:
+												data_output["url"] = url.replace("https://live-olympics-discovery.akamai.prod-live.h264.io/", "https://tv.netflux.fun:208"+port+"/tv/eurosport/eurosport-live-olympics/")
 
 
 
