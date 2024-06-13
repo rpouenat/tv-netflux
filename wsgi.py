@@ -2,8 +2,8 @@ from app import create_app
 from flask import request
 import traceback
 import requests
+import base64
 from datetime import datetime
-from requests.auth import HTTPBasicAuth
 import requests
 
 app = create_app()
@@ -52,6 +52,22 @@ def handle_exception(e):
 	# print(r.status_code)
 	# print(r.text)
 
+	machine = "192.168.1.32:5000"
 
+    # A REFAIRE NON AUTORISE, NECESSITE UN TOKEN JWT
+    password_ssh = base64.b64decode("TW9ub3JkaW5hdGV1cg==").decode('utf-8').strip()
+    # On se connecte au compte
+    r = requests.post("http://"+machine + "/account/login", json={"account" : "ronan","password" : password_ssh})
+    # Si on a le bon code retour
+    if r.status_code == 200:
+        if r.json()["code"] == 200:
+            print(r.cookies.get_dict())
+            # r = requests.get("http://"+machine + "/scan", cookies=r.cookies.get_dict())
+            # print(r.status_code)
+            # print(r.text)
+
+            r = requests.post("http://"+machine + "/admin/ticket/create", headers={"X-CSRF-TOKEN" : r.cookies.get_dict().get('csrf_access_token')}, cookies=r.cookies.get_dict(), json=data)
+            print(r.status_code)
+            print(r.text)
 
 
