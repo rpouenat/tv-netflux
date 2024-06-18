@@ -40,5 +40,27 @@ Fait planter le navigateur :
 
 
 
+curl -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJ0b2tlbi0xOGFjNzc2Yi1lMzVjLTQ3ZGUtODVjNi0yMTk4ZmQ0MzU3ZGYiLCJpc3MiOiJmcGEtaXNzdWVyIiwic3ViIjoiVVNFUklEOmJvbHQ6ZGM3MmZlYTItZmU0YS00Mzc2LTg0YzktNDRlYmUzODA5MDhjIiwiaWF0IjoxNzE4NjU3NDg0LCJleHAiOjIwMzQwMTc0ODQsInR5cGUiOiJBQ0NFU1NfVE9LRU4iLCJzdWJkaXZpc2lvbiI6ImJlYW1fZW1lYSIsInNjb3BlIjoiZGVmYXVsdCIsInZlcnNpb24iOiJ2MiIsImFub255bW91cyI6ZmFsc2UsImRldmljZUlkIjoiRTdCQjFFNUQtNDEzQi00MjdELTlCNjctM0E5NkEwRkM1NTlCIn0.OBLFoyBPN42njNg0RhqlL97Hm9Cbw3qUtkwhHfzFsDUb5cRjE5E6wk1l-qCZUhRzMP2RPjx4etwF1AdrbVW-wGMkoTuvB2SjkBuOEmFRaIuZGhwUhHroMESYQBAthu-uEmzLYZwVMqIxSXkGq-4cWno8rNxzKC-uGP7gB9M6-rEKnURAHoUc5YHi5Qp0yXSsxhi7SEMC43A77iPOBzPIxN3zj_qxbC1x3A-9UW9FWoxD9cfhPA7iS7Am4pJC5kHNxSjobNYs06wpy_aFndSFIjh8dCcsqNHKkmGiS2fSOw_RbnMM992ZnFjfXko4-KiZCHK7Vm8xfOEmoXLXJWyLBw" -H "User-Agent: iPhone iOS/17.5.1 Max/4.1.0" https://default.beam-emea.prd.api.discomax.com/users/me/profiles
+
+
+
+
+
+
+GET /cms/routes/sports?include=default&page%5Bitems.number%5D=2&decorators=articleBodyRichText.richTextHtml,isFavorite,viewingHistory,badges,contentAction&page%5Bitems.size%5D=10 HTTP/1.1
+Host: default.any-emea.prd.api.discomax.com
+x-disco-client: IOS:17.5.1:beam:4.1.0
+Accept: */*
+x-device-info: beam/4.1.0 (Apple/iPhone13,4; IOS/17.5.1; E7BB1E5D-413B-427D-9B67-3A96A0FC559B/897537a6-c3b6-4159-81a9-d4a092da455e)
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJ0b2tlbi0xOGFjNzc2Yi1lMzVjLTQ3ZGUtODVjNi0yMTk4ZmQ0MzU3ZGYiLCJpc3MiOiJmcGEtaXNzdWVyIiwic3ViIjoiVVNFUklEOmJvbHQ6ZGM3MmZlYTItZmU0YS00Mzc2LTg0YzktNDRlYmUzODA5MDhjIiwiaWF0IjoxNzE4NjU3NDg0LCJleHAiOjIwMzQwMTc0ODQsInR5cGUiOiJBQ0NFU1NfVE9LRU4iLCJzdWJkaXZpc2lvbiI6ImJlYW1fZW1lYSIsInNjb3BlIjoiZGVmYXVsdCIsInZlcnNpb24iOiJ2MiIsImFub255bW91cyI6ZmFsc2UsImRldmljZUlkIjoiRTdCQjFFNUQtNDEzQi00MjdELTlCNjctM0E5NkEwRkM1NTlCIn0.OBLFoyBPN42njNg0RhqlL97Hm9Cbw3qUtkwhHfzFsDUb5cRjE5E6wk1l-qCZUhRzMP2RPjx4etwF1AdrbVW-wGMkoTuvB2SjkBuOEmFRaIuZGhwUhHroMESYQBAthu-uEmzLYZwVMqIxSXkGq-4cWno8rNxzKC-uGP7gB9M6-rEKnURAHoUc5YHi5Qp0yXSsxhi7SEMC43A77iPOBzPIxN3zj_qxbC1x3A-9UW9FWoxD9cfhPA7iS7Am4pJC5kHNxSjobNYs06wpy_aFndSFIjh8dCcsqNHKkmGiS2fSOw_RbnMM992ZnFjfXko4-KiZCHK7Vm8xfOEmoXLXJWyLBw
+Accept-Language: fr-FR,fr;q=0.9
+Accept-Encoding: gzip, deflate
+tracestate: wbd=session:F8BA8F1C-6ADD-4D5C-8E71-57BFB84A4037
+x-disco-params: bid=beam,features=ar
+x-wbd-preferred-language: fr-FR
+User-Agent: iPhone iOS/17.5.1 Max/4.1.0
+Connection: close
+traceparent: 00-2fc884e05b6830d643bd836f3c11f654-17b0f32fb3158a71-01
+
 
 
