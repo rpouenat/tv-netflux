@@ -14,7 +14,28 @@ Create :
 	$ export DISPLAY=:99
 
 
+Fedora : 
 
+	$ sudo dnf install xorg-x11-server-Xvfb (inutile car on utilise vnc)
+	$ sudo yum install chromedriver
+	$ Xvfb :4 -screen 0 1920x1080x24 &
+
+
+
+VNC : 
+
+	$ vncserver :3 -geometry 1920x1080 -localhost no
+	$ vncserver -kill :3
+
+
+
+Generer un display pui s'y connecter :
+
+	$ vncserver :3 -geometry 1920x1080 -localhost no ; export DISPLAY=:3
+
+Chromium : 
+
+	$ chromium-browser --auto-select-desktop-capture-source='Entire screen' https://www.canalplus.com/live/tab/direct/sport --url https://netflux.fun:2087/amelkamlekalekmazlkemlakemalkemalkemlkaemalke/canal
 
 
 France 2 :
